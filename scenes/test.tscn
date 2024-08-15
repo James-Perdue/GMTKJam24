@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cr8o2aq4moqev"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
