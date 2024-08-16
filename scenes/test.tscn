@@ -3,5 +3,5 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="TextEdit" type="TextEdit" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_right = 425.0
+offset_bottom = 277.0
