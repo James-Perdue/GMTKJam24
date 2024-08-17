@@ -27,7 +27,8 @@ func _upgrade():
 	print("Upgrade Screen")
 	get_tree().paused = true
 	self.upgrade_loaded.show()
-
+	self.upgrade_loaded._show_food()
+	
 func _close_screen(new_food):
 	print("Exiting Screen")
 	self.upgrade_loaded.hide()

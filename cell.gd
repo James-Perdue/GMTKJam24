@@ -5,11 +5,11 @@ var color : String
 var lifeTime : int
 
 @onready var cellAnim = $CellAnimation;
-func initialize(speed : int, color : String, lifeTime : int) -> void:
-	if(speed > 0):
-		self.speed = speed
-	self.color = color
-	self.lifeTime = lifeTime
+func initialize(newSpeed : int, newColor : String, newLifeTime : int) -> void:
+	if(newSpeed > 0):
+		self.speed = newSpeed
+	self.color = newColor
+	self.lifeTime = newLifeTime
 	
 func _ready() -> void:
 	cellAnim.modulate = Color(color)
@@ -18,8 +18,9 @@ func _ready() -> void:
 	target_position = get_parent().get_random_point_in_circle(get_parent().colonyRadius)
 	move_to_target()
 	
-	await get_tree().create_timer(5).timeout
-	queue_free()
+	if(lifeTime > 0):
+		await get_tree().create_timer(lifeTime).timeout
+		queue_free()
 	
 func move_to_target():
 	var direction = (target_position - position).normalized()
