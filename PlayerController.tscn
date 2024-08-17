@@ -9,3 +9,5 @@ script = ExtResource("1_1ob37")
 [node name="Colony" parent="." instance=ExtResource("2_3b7ar")]
 
 [node name="Camera2D" type="Camera2D" parent="Colony"]
+
+[connection signal="colonyDied" from="Colony" to="." method="_on_colony_colony_died"]

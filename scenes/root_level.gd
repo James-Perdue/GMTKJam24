@@ -12,12 +12,16 @@ func _ready() -> void:
 func _on_food_timer_timeout() -> void:
 	
 	var screenSize = get_viewport_rect().size
-	var x = randf_range(camera.global_position.x - screenSize.x * .5, camera.global_position.x + screenSize.x * .5)
-	var y = randf_range(camera.global_position.y - screenSize.y * .5, camera.global_position.y + screenSize.y * .5)
-	
-	var foodInstance = Food.instantiate()
-	add_child(foodInstance)
-	
-	print(foodInstance.name)
-	foodInstance.position.x = x
-	foodInstance.position.y = y
+	if(camera):
+		var x = randf_range(camera.global_position.x - screenSize.x * .3, camera.global_position.x + screenSize.x * .3)
+		var y = randf_range(camera.global_position.y - screenSize.y * .3, camera.global_position.y + screenSize.y * .3)
+		
+		var foodInstance = Food.instantiate()
+		add_child(foodInstance)
+		foodInstance.position.x = x
+		foodInstance.position.y = y
+
+
+func _on_player_controller_game_over(won: bool) -> void:
+	$FoodTimer.stop()
+	$FoodTimer.queue_free() # Replace with function body.
