@@ -1,22 +1,22 @@
-extends CharacterBody2D
+extends Area2D
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-const moveDeadZone = 50
+var speed = 100  # Adjust the speed as needed
+var radius = 200  # Radius of the circle
+var target_position = Vector2()
 
-var target_position = Vector2.ZERO
 var colony : Node2D
-
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	randomize()
+	target_position = get_parent().get_random_point_in_circle(radius)
+	move_to_target()
 	
-func _physics_process(_delta: float) -> void:
-	if(colony):
-		target_position = colony.position
-		# Get the input direction and handle the movement/deceleration.
-		if((target_position - position).length_squared() > moveDeadZone):
-			var direction := (target_position - position).normalized()
-			if direction:
-				velocity = direction * SPEED
-				
-			move_and_slide()
+func move_to_target():
+	var direction = (target_position - position).normalized()
+	position += direction * speed * get_process_delta_time()
+	if position.distance_to(target_position) < speed * get_process_delta_time():
+		target_position = get_parent().get_random_point_in_circle(radius)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func _process(delta: float) -> void:
+	move_to_target()
