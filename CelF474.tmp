@@ -3,17 +3,16 @@
 [ext_resource type="Script" path="res://cell.gd" id="1_ou2ee"]
 [ext_resource type="SpriteFrames" uid="uid://buswbbf3dlopx" path="res://Sprite/Cell.tres" id="2_58gj8"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_trnpa"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_u24hl"]
 
-[node name="Area2D" type="Area2D"]
-scale = Vector2(4, 4)
+[node name="Cell" type="CharacterBody2D"]
+scale = Vector2(0.063, 0.063)
+motion_mode = 1
 script = ExtResource("1_ou2ee")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(7.17039, 7.03077)
-shape = SubResource("CircleShape2D_trnpa")
+shape = SubResource("CircleShape2D_u24hl")
 
-[node name="CellAnimation" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_58gj8")
-animation = &"wiggle"
-frame_progress = 0.017797
