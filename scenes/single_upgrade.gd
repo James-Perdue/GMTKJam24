@@ -58,9 +58,7 @@ func center(txt: StringName) -> StringName:
 	return "[center]%s[/center]" % txt
 
 func check_cost(food_val: int):
-	print("Got Food Update %d" % food_val)
 	if self.base_cost > food_val:
 		$purchase_button.set_disabled(true)
 	elif $purchase_button.is_disabled() and self.base_cost <= food_val:
 		$purchase_button.set_disabled(false)
-	print("Exit Point")

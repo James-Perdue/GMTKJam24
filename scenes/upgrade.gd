@@ -52,3 +52,7 @@ func _subtract_food(amount):
 	self.food -= amount
 	self._show_food()
 	food_status.emit(self.food)
+
+# Return a dictionary representation of the upgrades for use by other systems
+func to_dict():
+	return stat_dict
