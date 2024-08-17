@@ -1,0 +1,37 @@
+{
+	"Speed": {
+		"Description": "Additional Flagella improve the cell's maximum speed",
+		"Base Cost": 100,
+		"Scalar": 1.1
+	},
+	"Toughness": {
+		"Description": "A thicker cell wall means this cell can take more damage",
+		"Base Cost": 100,
+		"Scalar": 1.1
+	},
+	"Agility": {
+		"Description": "Cillia on the sides of the cells increase their ability to turn and accelerate",
+		"Base Cost": 100,
+		"Scalar": 1.1
+	},
+	"Lifespan": {
+		"Description": "Adapt this cell to a longer lifespan",
+		"Base Cost": 200,
+		"Scalar": 1.1
+	},
+	"Mitosis Cost": {
+		"Description": "Additional centrosomes make it easier for this cell to reproduce",
+		"Base Cost": 100,
+		"Scalar": 2.0
+	},
+	"Surface Antigens": {
+		"Description": "Improved surface antigens cause more contact damage to other cells",
+		"Base Cost": 100,
+		"Scalar": 1.2
+	},
+	"Antibodies": {
+		"Description": "Stronger antibodies deal damage at a distance",
+		"Base Cost": 100,
+		"Scalar": 1.3
+	}
+}

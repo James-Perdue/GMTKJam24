@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhkuq24lt0pkp"]
+
+[ext_resource type="Texture2D" uid="uid://ddlgmthbhq10i" path="res://art/temp_bkgnd.png" id="1_8ad84"]
+[ext_resource type="Script" path="res://scenes/upgrade.gd" id="2_kdl0j"]
+[ext_resource type="Texture2D" uid="uid://buij1vv5q652e" path="res://art/temp_button_bkgnd.png" id="2_vrnqo"]
+[ext_resource type="PackedScene" uid="uid://c70hav10eduus" path="res://scenes/single_upgrade_button.tscn" id="3_v823i"]
+
+[sub_resource type="Theme" id="Theme_h7hwf"]
+
+[node name="upgrade_screen" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8ad84")
+expand_mode = 2
+script = ExtResource("2_kdl0j")
+upgrade_option = ExtResource("3_v823i")
+metadata/_edit_lock_ = true
+
+[node name="title_block" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.05
+anchor_right = 0.975
+anchor_bottom = 0.15
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vrnqo")
+expand_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="rich_text" type="RichTextLabel" parent="title_block"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+
+[node name="resource_display" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.155
+anchor_right = 0.975
+anchor_bottom = 0.255
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vrnqo")
+expand_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="rich_text" type="RichTextLabel" parent="resource_display"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+
+[node name="upgrade_grid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.3
+anchor_right = 0.975
+anchor_bottom = 0.95
+theme = SubResource("Theme_h7hwf")
+columns = 2
