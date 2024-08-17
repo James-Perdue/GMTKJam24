@@ -9,7 +9,7 @@ var cells = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(100):
+	for i in range(5):
 		spawnCell()
 	#print(get_tree().current_scene)
 	
@@ -29,10 +29,10 @@ func spawnCell():
 	#)
 	
 	var cellInstance = Cell.instantiate()
+	cellInstance.color = "red"
 	add_child(cellInstance)
 	#cellInstance.position = get_random_point_in_circle(radius)
-	cellInstance.colony = self
-	cellInstance.color = "red"
+	
 	cells.append(cellInstance)
 	
 	updateColony()
