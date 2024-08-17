@@ -1,14 +1,39 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://buswbbf3dlopx"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://buswbbf3dlopx"]
 
-[ext_resource type="Texture2D" uid="uid://cnh6fxrqyf5bo" path="res://icon.svg" id="1_resh5"]
+[ext_resource type="Texture2D" uid="uid://cjdxghvg32hfu" path="res://assets/CellV3NoColor-sheet.png" id="1_y8qgm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3582n"]
+atlas = ExtResource("1_y8qgm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiwu2"]
+atlas = ExtResource("1_y8qgm")
+region = Rect2(37, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3f8d"]
+atlas = ExtResource("1_y8qgm")
+region = Rect2(74, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bm2f2"]
+atlas = ExtResource("1_y8qgm")
+region = Rect2(111, 0, 32, 32)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_resh5")
+"texture": SubResource("AtlasTexture_3582n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uiwu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3f8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bm2f2")
 }],
 "loop": true,
-"name": &"default",
+"name": &"wiggle",
 "speed": 5.0
 }]
