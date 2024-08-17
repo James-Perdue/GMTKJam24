@@ -39,6 +39,7 @@ theme = SubResource("Theme_6cvxa")
 script = ExtResource("1_5gfgc")
 
 [node name="cell_count" type="PanelContainer" parent="."]
+layout_mode = 0
 offset_right = 100.0
 offset_bottom = 50.0
 

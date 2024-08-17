@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://ck5vcsja7w6n0"]
 
-[ext_resource type="Texture2D" path="res://AnimatedPump.tres" id="1_remyy"]
+[ext_resource type="Texture2D" uid="uid://dvfyg7mtw0wh3" path="res://AnimatedPump.tres" id="1_remyy"]
 [ext_resource type="Texture2D" uid="uid://ciqu87d43n6ga" path="res://assets/TempPumpMerg.png" id="1_w5blu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qfhe"]
