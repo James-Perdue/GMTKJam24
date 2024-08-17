@@ -2,9 +2,11 @@ extends Node2D
 var Food = preload("res://Food.tscn")
 
 var player
+var enemy
 var camera
 func _ready() -> void:
 	player = $PlayerController
+	enemy = $EnemyController
 	camera = $PlayerController/Colony/Camera2D
 
 # Fix the control node size (containers really don't like being a child of Node2D)

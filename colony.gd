@@ -7,20 +7,22 @@ var colonyRadius: int
 var velocity = Vector2.ZERO
 var cells = []
 var food = 0
-var cellLifeTime = 20
+var colonyColor : String = "red"
+var cellLifeTime : int = 20
 
 signal cellDied(cell : Area2D)
 signal colonyDied()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print('colony spawned')
 	self.set_meta("type", "colony")
-	$Camera2D/hud_cont/hud.set_food(food)
+	#$Camera2D/hud_cont/hud.set_food(food)
 	for i in range(1):
 		spawnCell()
 	#print(get_tree().current_scene)
-	$Camera2D/hud_cont/hud.update_count(len(cells))
-	$Camera2D/hud_cont/hud.upgraded.connect(self._apply_upgrades)
+	#$Camera2D/hud_cont/hud.update_count(len(cells))
+	#$Camera2D/hud_cont/hud.upgraded.connect(self._apply_upgrades)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -37,15 +39,16 @@ func splitCell():
 		
 func spawnCell():
 	var cellInstance = Cell.instantiate()
-	cellInstance.initialize(0, "red", cellLifeTime)
+	cellInstance.color = colonyColor
+	cellInstance.initialize(0, colonyColor, cellLifeTime)
 	add_child(cellInstance)
 	if(len(cells) > 0):
 		cellInstance.position = cells[-1].position
 	cells.append(cellInstance)
 	
 	updateColony()
-	$Camera2D/hud_cont/hud.update_count(len(cells))
-	$Camera2D/hud_cont/hud.set_food(food)
+	#$Camera2D/hud_cont/hud.update_count(len(cells))
+	#$Camera2D/hud_cont/hud.set_food(food)
 	
 func updateColony():
 	colonyRadius = len(cells) * perCellRadius
@@ -66,7 +69,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		if type == "food":
 			area.queue_free()
 			food += 1
-			$Camera2D/hud_cont/hud.set_food(food)
+			#$Camera2D/hud_cont/hud.set_food(food)
 		if type == "colony":
 			pass
 
