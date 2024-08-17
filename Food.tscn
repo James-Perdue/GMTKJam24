@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cn8v2j81phl6m" path="res://assets/Sugar.png" id="2_jkf5f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kfj7t"]
-radius = 66.0681
+radius = 10.9949
 
 [node name="Food" type="Area2D"]
 scale = Vector2(1.5, 1.5)
