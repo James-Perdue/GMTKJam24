@@ -27,6 +27,7 @@ func _upgrade():
 	print("Upgrade Screen")
 	get_tree().paused = true
 	self.upgrade_loaded.show()
+	self.upgrade_loaded._show_food()
 
 func _close_screen(new_food):
 	print("Exiting Screen")
@@ -38,7 +39,6 @@ func _close_screen(new_food):
 func set_food(new_food: int):
 	self.upgrade_loaded.food = new_food
 	self.upgrade_loaded.food_status.emit(new_food)  # Signal syncing to upgrade screen
-	self.upgrade_loaded._show_food()
 	$food_count/RichTextLabel.text = "[color=black]FOOD: %d[/color]" % self.upgrade_loaded.food
 
 func update_count(new_count: int):
