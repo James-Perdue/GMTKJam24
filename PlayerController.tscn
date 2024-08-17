@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://clhgopfoq7iyb"]
+[gd_scene load_steps=5 format=3 uid="uid://clhgopfoq7iyb"]
 
 [ext_resource type="Script" path="res://player_controller.gd" id="1_1ob37"]
-[ext_resource type="PackedScene" uid="uid://djqg1btfu70ju" path="res://Colony.tscn" id="2_3b7ar"]
+[ext_resource type="PackedScene" uid="uid://bx4n2alsx7ws4" path="res://Colony.tscn" id="2_3b7ar"]
+[ext_resource type="PackedScene" uid="uid://ca6p41qscy2ft" path="res://scenes/hud.tscn" id="3_8uawu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xreya"]
 
 [node name="PlayerController" type="Node2D"]
 script = ExtResource("1_1ob37")
@@ -9,5 +12,18 @@ script = ExtResource("1_1ob37")
 [node name="Colony" parent="." instance=ExtResource("2_3b7ar")]
 
 [node name="Camera2D" type="Camera2D" parent="Colony"]
+
+[node name="hud_cont" type="PanelContainer" parent="Colony/Camera2D"]
+z_index = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+pivot_offset = Vector2(576, 328)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xreya")
+
+[node name="hud" parent="Colony/Camera2D/hud_cont" instance=ExtResource("3_8uawu")]
+layout_mode = 2
 
 [connection signal="colonyDied" from="Colony" to="." method="_on_colony_colony_died"]
