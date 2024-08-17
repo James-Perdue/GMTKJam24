@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cjdxghvg32hfu"
-path="res://.godot/imported/GermV3NoColor-sheet.png-b8118c589218681ed72a145f3960b466.ctex"
+path="res://.godot/imported/CellV3NoColor-sheet.png-45031acd8e131f8d87268759ff6fc9a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GermV3NoColor-sheet.png"
-dest_files=["res://.godot/imported/GermV3NoColor-sheet.png-b8118c589218681ed72a145f3960b466.ctex"]
+source_file="res://assets/CellV3NoColor-sheet.png"
+dest_files=["res://.godot/imported/CellV3NoColor-sheet.png-45031acd8e131f8d87268759ff6fc9a7.ctex"]
 
 [params]
 
