@@ -31,5 +31,6 @@ func spawnCell():
 	get_parent().add_child.call_deferred(cellInstance)
 	cellInstance.position = new_point
 	cellInstance.colony = self
+	cellInstance.color = "red"
 	cellCount+=1
 	spawnRadius += 1

@@ -6,9 +6,13 @@ const moveDeadZone = 50
 
 var target_position = Vector2.ZERO
 var colony : Node2D
+var color : String
+
+@onready var cellAnim = $CellAnimation;
 
 func _ready() -> void:
-	pass
+	cellAnim.modulate = Color(color)
+	cellAnim.play("wiggle")
 	
 func _physics_process(_delta: float) -> void:
 	if(colony):
