@@ -7,14 +7,15 @@ var colonyRadius: int
 var velocity = Vector2.ZERO
 var cells = []
 var food = 0
-var colonyColor : String
-var cellLifeTime = 20
+var colonyColor : String = "red"
+var cellLifeTime : int = 20
 
 signal cellDied(cell : Area2D)
 signal colonyDied()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print('colony spawned')
 	self.set_meta("type", "colony")
 	for i in range(1):
 		spawnCell()
@@ -36,7 +37,7 @@ func splitCell():
 func spawnCell():
 	var cellInstance = Cell.instantiate()
 	cellInstance.color = colonyColor
-	cellInstance.initialize(0, "red", cellLifeTime)
+	cellInstance.initialize(0, colonyColor, cellLifeTime)
 	add_child(cellInstance)
 	if(len(cells) > 0):
 		cellInstance.position = cells[-1].position
