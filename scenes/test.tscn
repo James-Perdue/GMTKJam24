@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://cr8o2aq4moqev"]
+[gd_scene load_steps=2 format=3 uid="uid://cr8o2aq4moqev"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://clhgopfoq7iyb" path="res://PlayerController.tscn" id="1_rveow"]
 
-[node name="TextEdit" type="TextEdit" parent="."]
-offset_right = 425.0
-offset_bottom = 277.0
+[node name="RootLevel" type="Node2D"]
+
+[node name="PlayerController" parent="." instance=ExtResource("1_rveow")]
