@@ -52,7 +52,6 @@ func get_random_point_in_circle(radius):
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	#if area.get_parent() != self && area.isFood == true:
-		#area.queue_free()
-		#food += 1
-	pass
+	if area.get_parentaaaaaaa() != self && area.isFood == true:
+		area.queue_free()
+		food += 1

@@ -1,12 +1,13 @@
 extends Node2D
+var Colony = preload("res://Colony.tscn")
 var colony: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	colony = $Colony
+	colony = Colony.instantiate()
 	colony.colonyColor = "blue"
-	#add_child(colony)
 	colony.position = Vector2(150, 256)
+	add_child(colony)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
