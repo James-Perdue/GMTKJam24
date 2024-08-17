@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx4n2alsx7ws4"]
+[gd_scene load_steps=4 format=3 uid="uid://djqg1btfu70ju"]
 
 [ext_resource type="Script" path="res://colony.gd" id="1_xd5u4"]
 [ext_resource type="Texture2D" uid="uid://cnh6fxrqyf5bo" path="res://icon.svg" id="2_j5ywq"]

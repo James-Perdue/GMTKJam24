@@ -7,6 +7,7 @@ var colonyRadius: int
 var velocity = Vector2.ZERO
 var cells = []
 var food = 0
+var colonyColor : String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,7 +30,7 @@ func splitCell():
 		
 func spawnCell():
 	var cellInstance = Cell.instantiate()
-	cellInstance.color = "red"
+	cellInstance.color = colonyColor
 	add_child(cellInstance)
 	if(len(cells) > 0):
 		cellInstance.position = cells[-1].position
@@ -51,6 +52,7 @@ func get_random_point_in_circle(radius):
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.get_parent() != self && area.isFood == true:
-		area.queue_free()
-		food += 1
+	#if area.get_parent() != self && area.isFood == true:
+		#area.queue_free()
+		#food += 1
+	pass

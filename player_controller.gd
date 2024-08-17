@@ -3,6 +3,7 @@ var colony: Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	colony = $Colony
+	colony.colonyColor = "red"
 
 func _process(_delta: float) -> void:
 	var viewport = get_viewport()
