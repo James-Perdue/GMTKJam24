@@ -5,9 +5,10 @@ extends TextureRect
 
 
 var upgrade_list = self._load_text_options("res://data/upgrades.json")
-var food = 1000
+var food = 0
 
 signal food_status(food_val)
+signal exit_scene(remaining_food)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +18,7 @@ func _ready() -> void:
 		_add_to_grid(stat_dict[stat_name])
 	$title_block/rich_text.text = "[p align=center][b][font_size=50]CHOOSE CELL UPGRADES[/font_size][/b][/p]"
 	self._show_food()
+	$exit_cont/exit_button.pressed.connect(self._exit_button)
 
 func _show_food():
 		$resource_display/rich_text.text = '[p align=center][font_size=30]Current Food: %d [img=30]res://icon.svg[/img][/font_size][/p]' % self.food
@@ -56,3 +58,6 @@ func _subtract_food(amount):
 # Return a dictionary representation of the upgrades for use by other systems
 func to_dict():
 	return stat_dict
+	
+func _exit_button():
+	exit_scene.emit(self.food)

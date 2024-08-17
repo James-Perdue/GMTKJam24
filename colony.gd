@@ -15,9 +15,12 @@ signal colonyDied()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.set_meta("type", "colony")
+	$Camera2D/hud_cont/hud.set_food(food)
 	for i in range(1):
 		spawnCell()
 	#print(get_tree().current_scene)
+	$Camera2D/hud_cont/hud.update_count(len(cells))
+	$Camera2D/hud_cont/hud.upgraded.connect(self._apply_upgrades)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -41,6 +44,8 @@ func spawnCell():
 	cells.append(cellInstance)
 	
 	updateColony()
+	$Camera2D/hud_cont/hud.update_count(len(cells))
+	$Camera2D/hud_cont/hud.set_food(food)
 	
 func updateColony():
 	colonyRadius = len(cells) * perCellRadius
@@ -61,6 +66,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		if type == "food":
 			area.queue_free()
 			food += 1
+			$Camera2D/hud_cont/hud.set_food(food)
 		if type == "colony":
 			pass
 
@@ -70,3 +76,6 @@ func _on_cell_died(cell: Area2D) -> void:
 	if(len(cells) <= 0):
 		colonyDied.emit()
 		queue_free()
+
+func _apply_upgrades(new_food_total: int):
+	self.food = new_food_total

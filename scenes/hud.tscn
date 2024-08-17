@@ -1,0 +1,137 @@
+[gd_scene load_steps=13 format=3 uid="uid://ca6p41qscy2ft"]
+
+[ext_resource type="Texture2D" uid="uid://dhh7borlfgxlc" path="res://art/unpressed_button.png" id="1_4b7i3"]
+[ext_resource type="Script" path="res://scenes/hud.gd" id="1_5gfgc"]
+[ext_resource type="Texture2D" uid="uid://bk32x8xia1w3n" path="res://art/upgrade_bkgnd.png" id="1_bdqno"]
+[ext_resource type="Texture2D" uid="uid://i5yp0dcbxm6" path="res://art/pressed_button.png" id="2_03vw8"]
+[ext_resource type="Texture2D" uid="uid://2tf23y4l4fjd" path="res://art/disabled_button.png" id="3_xenk4"]
+[ext_resource type="Script" path="res://scenes/fpsLabel.gd" id="6_nlag6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p52n4"]
+
+[sub_resource type="Theme" id="Theme_6cvxa"]
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_p52n4")
+
+[sub_resource type="InputEventKey" id="InputEventKey_uktgr"]
+device = -1
+keycode = 85
+unicode = 117
+
+[sub_resource type="Shortcut" id="Shortcut_ms15g"]
+events = [SubResource("InputEventKey_uktgr")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_88m7c"]
+device = -1
+keycode = 77
+unicode = 109
+
+[sub_resource type="Shortcut" id="Shortcut_jagvd"]
+events = [SubResource("InputEventKey_88m7c")]
+
+[node name="hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_6cvxa")
+script = ExtResource("1_5gfgc")
+
+[node name="cell_count" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 50.0
+
+[node name="TextureRect" type="TextureRect" parent="cell_count"]
+layout_mode = 2
+texture = ExtResource("1_bdqno")
+expand_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="cell_count"]
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="food_count" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_right = 0.2
+offset_right = 100.0
+offset_bottom = 50.0
+
+[node name="TextureRect" type="TextureRect" parent="food_count"]
+layout_mode = 2
+texture = ExtResource("1_bdqno")
+expand_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="food_count"]
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="upgrades" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_right = 0.8
+offset_left = -100.0
+offset_bottom = 50.0
+grow_horizontal = 0
+
+[node name="Button" type="TextureButton" parent="upgrades"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_ms15g")
+texture_normal = ExtResource("1_4b7i3")
+texture_pressed = ExtResource("2_03vw8")
+texture_disabled = ExtResource("3_xenk4")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="upgrades"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[color=black]UPGRADES[/color]"
+
+[node name="mutations" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_bottom = 50.0
+grow_horizontal = 0
+
+[node name="Button" type="TextureButton" parent="mutations"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_jagvd")
+texture_normal = ExtResource("1_4b7i3")
+texture_pressed = ExtResource("2_03vw8")
+texture_disabled = ExtResource("3_xenk4")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="mutations"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[color=black]MUTATIONS[/color]"
+
+[node name="fps_track" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 100.0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="fps_track"]
+layout_mode = 2
+texture = ExtResource("1_bdqno")
+expand_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="fps_track"]
+layout_mode = 2
+bbcode_enabled = true
+script = ExtResource("6_nlag6")
