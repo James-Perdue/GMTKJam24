@@ -4,6 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://buswbbf3dlopx" path="res://Sprite/Cell.tres" id="2_58gj8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_trnpa"]
+radius = 2.06474
 
 [node name="Area2D" type="Area2D"]
 scale = Vector2(4, 4)

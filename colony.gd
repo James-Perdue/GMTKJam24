@@ -1,15 +1,16 @@
 extends Node2D
 var Cell = preload("res://Cell.tscn")
-const perCellRadius = 2.5;
+const perCellRadius = 15;
 
 var speed = 400
-var colonyRadius = 200
+var colonyRadius: int
 var velocity = Vector2.ZERO
 var cells = []
+var food = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(5):
+	for i in range(1):
 		spawnCell()
 	#print(get_tree().current_scene)
 	
@@ -21,18 +22,17 @@ func _process(delta: float) -> void:
 func move(direction: Vector2):
 	velocity = direction.normalized() * speed
 
+func splitCell():
+	if(food >= 1):
+		food -= 1
+		spawnCell()
+		
 func spawnCell():
-	#var random_angle = randf() * 2 * PI  # Random angle in radians
-	#var new_point = Vector2(
-		#position.x + spawnRadius * cos(random_angle),
-		#position.y + spawnRadius * sin(random_angle)
-	#)
-	
 	var cellInstance = Cell.instantiate()
 	cellInstance.color = "red"
 	add_child(cellInstance)
-	#cellInstance.position = get_random_point_in_circle(radius)
-	
+	if(len(cells) > 0):
+		cellInstance.position = cells[-1].position
 	cells.append(cellInstance)
 	
 	updateColony()
@@ -48,3 +48,9 @@ func get_random_point_in_circle(radius):
 	var x = r * cos(angle)
 	var y = r * sin(angle)
 	return Vector2(x, y)
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.get_parent() != self && area.isFood == true:
+		area.queue_free()
+		food += 1
