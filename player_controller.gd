@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 		colony.splitCell()
 	
 	var input_vector = Vector2.ZERO
-	var screenSize = get_viewport_rect().size
+	#var screenSize = get_viewport_rect().size
 	
 	#if(colony.position.x < -screenSize.x * .5):
 		#input_vector.x = Input.get_action_strength("move_right")
