@@ -1,11 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhkuq24lt0pkp"]
+[gd_scene load_steps=10 format=3 uid="uid://b3ue5l35shrc8"]
 
 [ext_resource type="Texture2D" uid="uid://ddlgmthbhq10i" path="res://art/temp_bkgnd.png" id="1_8ad84"]
 [ext_resource type="Script" path="res://scenes/upgrade.gd" id="2_kdl0j"]
 [ext_resource type="Texture2D" uid="uid://buij1vv5q652e" path="res://art/temp_button_bkgnd.png" id="2_vrnqo"]
-[ext_resource type="PackedScene" uid="uid://c70hav10eduus" path="res://scenes/single_upgrade_button.tscn" id="3_v823i"]
+[ext_resource type="PackedScene" path="res://scenes/single_upgrade_button.tscn" id="3_v823i"]
+[ext_resource type="Texture2D" uid="uid://bhdeol5mcbf01" path="res://art/exit.png" id="5_nwkgk"]
+[ext_resource type="Texture2D" uid="uid://dcunn71mak0qd" path="res://art/pressed_exit.png" id="6_oyv2s"]
 
 [sub_resource type="Theme" id="Theme_h7hwf"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_r5fhj"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="Shortcut" id="Shortcut_mnc2t"]
+events = [SubResource("InputEventKey_r5fhj")]
 
 [node name="upgrade_screen" type="TextureRect"]
 anchors_preset = 15
@@ -72,3 +82,22 @@ anchor_right = 0.975
 anchor_bottom = 0.95
 theme = SubResource("Theme_h7hwf")
 columns = 2
+
+[node name="exit_cont" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+alignment_horizontal = 2
+alignment_vertical = 2
+
+[node name="exit_button" type="TextureButton" parent="exit_cont"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_mnc2t")
+texture_normal = ExtResource("5_nwkgk")
+texture_pressed = ExtResource("6_oyv2s")
