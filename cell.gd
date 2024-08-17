@@ -5,8 +5,13 @@ var radius = 200  # Radius of the circle
 var target_position = Vector2()
 
 var colony : Node2D
-# Called when the node enters the scene tree for the first time.
+var color : String
+
+@onready var cellAnim = $CellAnimation;
+
 func _ready() -> void:
+	cellAnim.modulate = Color(color)
+	cellAnim.play("wiggle")
 	randomize()
 	target_position = get_parent().get_random_point_in_circle(radius)
 	move_to_target()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://03jcgxsedise"]
+[gd_scene load_steps=4 format=3 uid="uid://b0ccc6s1a6cmy"]
 
 [ext_resource type="SpriteFrames" uid="uid://buswbbf3dlopx" path="res://Sprite/Cell.tres" id="2_58gj8"]
 
@@ -36,5 +36,8 @@ script = SubResource("GDScript_7yibp")
 scale = Vector2(7.17039, 7.03077)
 shape = SubResource("CircleShape2D_trnpa")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="CellAnimation" type="AnimatedSprite2D" parent="."]
+scale = Vector2(40, 40)
 sprite_frames = ExtResource("2_58gj8")
+animation = &"wiggle"
+frame_progress = 0.017797

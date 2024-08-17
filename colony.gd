@@ -32,10 +32,10 @@ func spawnCell():
 	add_child(cellInstance)
 	#cellInstance.position = get_random_point_in_circle(radius)
 	cellInstance.colony = self
+	cellInstance.color = "red"
 	cells.append(cellInstance)
 	
 	updateColony()
-	#spawnRadius += .5
 	
 func updateColony():
 	colonyRadius = len(cells) * perCellRadius
