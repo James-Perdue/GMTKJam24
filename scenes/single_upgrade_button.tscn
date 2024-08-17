@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://c70hav10eduus"]
+
+[ext_resource type="Texture2D" uid="uid://bk32x8xia1w3n" path="res://art/upgrade_bkgnd.png" id="1_dogw7"]
+[ext_resource type="Texture2D" uid="uid://dhh7borlfgxlc" path="res://art/unpressed_button.png" id="2_5ofek"]
+[ext_resource type="Script" path="res://scenes/single_upgrade.gd" id="2_ekf3c"]
+[ext_resource type="Texture2D" uid="uid://i5yp0dcbxm6" path="res://art/pressed_button.png" id="3_3wldd"]
+[ext_resource type="Texture2D" uid="uid://2tf23y4l4fjd" path="res://art/disabled_button.png" id="5_7y1ou"]
+
+[node name="single_upgrade" type="TextureRect"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.154
+grow_horizontal = 2
+texture = ExtResource("1_dogw7")
+expand_mode = 2
+script = ExtResource("2_ekf3c")
+metadata/_edit_lock_ = true
+
+[node name="purchase_button" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.9
+grow_vertical = 2
+texture_normal = ExtResource("2_5ofek")
+texture_pressed = ExtResource("3_3wldd")
+texture_disabled = ExtResource("5_7y1ou")
+stretch_mode = 0
+
+[node name="update_label" type="RichTextLabel" parent="purchase_button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+
+[node name="cost_disp" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_top = 0.1
+anchor_right = 0.75
+anchor_bottom = 0.9
+offset_right = 1.0
+bbcode_enabled = true
+
+[node name="owned_disp" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_top = 0.1
+anchor_right = 0.99
+anchor_bottom = 0.9
+bbcode_enabled = true
+text = "Need Update"
