@@ -20,6 +20,8 @@ visible = false
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_j5ywq")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

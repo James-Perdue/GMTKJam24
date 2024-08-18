@@ -20,7 +20,7 @@ func _set_hud_location():
 	# Get top corner position = global_position - size * 4
 	print(-$Colony/Camera2D.global_position)
 	$Colony/Camera2D/hud_cont.size = vp_size.size
-	$Colony/Camera2D/hud_cont.scale = Vector2(4, 4)
+	$Colony/Camera2D/hud_cont.scale = Vector2(1, 1)
 
 func _process(_delta: float) -> void:
 	var viewport = get_viewport()

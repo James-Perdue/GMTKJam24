@@ -35,11 +35,12 @@ func _ready() -> void:
 
 # Fix the control node size (containers really don't like being a child of Node2D)
 func initializeEnemies() -> void:
-	for enemy in enemies:
-		print('enemy', enemy)
-		var initializedEnemy = EnemyController.instantiate()
-		initializedEnemy.colonySettings = enemy
-		add_child(initializedEnemy)
+	if(true):
+		for enemy in enemies:
+			print('enemy', enemy)
+			var initializedEnemy = EnemyController.instantiate()
+			initializedEnemy.colonySettings = enemy 
+			add_child(initializedEnemy)
 		
 func _on_food_timer_timeout() -> void:
 	var screenSize = get_viewport_rect().size
