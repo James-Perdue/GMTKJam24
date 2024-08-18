@@ -9,6 +9,7 @@ func _ready() -> void:
 	colony.colonyColor = "blue"
 	colony.speed = 200
 	colony.position = startPosition
+	colony.cellLifeTime = 0
 	add_child(colony)
 	pass
 
@@ -22,5 +23,5 @@ func _process(delta: float) -> void:
 			colony.move(direction)
 		else:
 			colony.move(startPosition - colony.global_position)
-			
+	print(colony.get_node("Area2D/CollisionShape2D").shape.radius)
 	pass

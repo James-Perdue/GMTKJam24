@@ -1,28 +1,38 @@
 extends Node2D
-var Cell = preload("res://Cell.tscn")
-const perCellRadius = 15;
+@export var initialCells := 1
 
-var speed = 400
+var Cell = preload("res://Cell.tscn")
+var perCellRadius = 15;
+
 var colonyRadius: int
 var velocity = Vector2.ZERO
 var cells = []
 var food = 0
 var colonyColor : String = "red"
-var cellLifeTime : int = 20
 
+#Upgradeable Stats
+var speed = 400
+var damageMultiplier = 1
+var cellLifeTime := 20
+var cellDurability := 2
+
+signal colonyUpdated()
 signal cellDied(cell : Area2D)
+signal foodChanged(newFood : int)
 signal colonyDied()
 
+func _init() -> void:
+	pass
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print('colony spawned')
-	self.set_meta("type", "colony")
-	#$Camera2D/hud_cont/hud.set_food(food)
-	for i in range(1):
+	$Area2D.set_meta("type", "colony")
+	self.cells = Array()
+	var circleShapeInstance = CircleShape2D.new()
+	self.get_node("Area2D/CollisionShape2D").shape = circleShapeInstance
+	for i in range(initialCells):
 		spawnCell()
 	#print(get_tree().current_scene)
-	#$Camera2D/hud_cont/hud.update_count(len(cells))
-	#$Camera2D/hud_cont/hud.upgraded.connect(self._apply_upgrades)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -43,17 +53,18 @@ func spawnCell():
 	cellInstance.initialize(0, colonyColor, cellLifeTime)
 	add_child(cellInstance)
 	if(len(cells) > 0):
-		cellInstance.position = cells[-1].position
-	cells.append(cellInstance)
+		cellInstance.position = self.cells[-1].position
+	self.cells.append(cellInstance)
 	
-	updateColony()
-	#$Camera2D/hud_cont/hud.update_count(len(cells))
-	#$Camera2D/hud_cont/hud.set_food(food)
+	self.updateColony()
+	
 	
 func updateColony():
-	colonyRadius = len(cells) * perCellRadius
-	if $Area2D/CollisionShape2D.shape is CircleShape2D:
-		$Area2D/CollisionShape2D.shape.radius = colonyRadius
+	print("update")
+	self.colonyRadius = len(self.cells) * self.perCellRadius
+	if self.get_node("Area2D/CollisionShape2D").shape is CircleShape2D:
+		self.get_node("Area2D/CollisionShape2D").shape.radius = self.colonyRadius
+	self.colonyUpdated.emit()
 		
 func get_random_point_in_circle(radius):
 	var angle = randf_range(0, 2 * PI)
@@ -69,10 +80,16 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		if type == "food":
 			area.queue_free()
 			food += 1
-			#$Camera2D/hud_cont/hud.set_food(food)
+			foodChanged.emit(food)
+			return
 		if type == "colony":
-			pass
+			hitColony(area.get_parent())
 
+func hitColony(colony):
+	var totalDamage = len(cells) * damageMultiplier
+	var cellsKilled = floor(totalDamage / colony.cellDurability)
+	print(cellsKilled)
+	
 func _on_cell_died(cell: Area2D) -> void:
 	cells.erase(cell)
 	updateColony()
@@ -80,5 +97,8 @@ func _on_cell_died(cell: Area2D) -> void:
 		colonyDied.emit()
 		queue_free()
 
-func _apply_upgrades(new_food_total: int):
-	self.food = new_food_total
+func _updateStats(new_food_total: int):
+	if(food != new_food_total):
+		self.food = new_food_total
+		foodChanged.emit()
+	

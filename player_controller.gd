@@ -7,6 +7,9 @@ var hud: HeadsUp
 func _ready() -> void:
 	colony = $Colony
 	hud = $Colony/Camera2D/hud_cont/hud
+	$Colony/Camera2D/hud_cont/hud.set_food(colony.food)
+	$Colony/Camera2D/hud_cont/hud.update_count(len(colony.cells))
+	$Colony/Camera2D/hud_cont/hud.upgraded.connect(colony._updateStats)
 	self._set_hud_location()
 
 func _set_hud_location():
@@ -36,3 +39,13 @@ func _process(_delta: float) -> void:
 func _on_colony_colony_died() -> void:
 	gameOver.emit(false)
 	queue_free()
+
+func _on_colony_colony_updated() -> void:
+	if(colony):
+		$Colony/Camera2D/hud_cont/hud.update_count(len(colony.cells))
+	if(colony):
+		$Colony/Camera2D/hud_cont/hud.set_food(colony.food)
+
+
+func _on_colony_food_changed(newFood: int) -> void:
+	$Colony/Camera2D/hud_cont/hud.set_food(newFood)
