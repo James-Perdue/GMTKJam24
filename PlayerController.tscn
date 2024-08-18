@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://player_controller.gd" id="1_1ob37"]
 [ext_resource type="PackedScene" uid="uid://bx4n2alsx7ws4" path="res://Colony.tscn" id="2_3b7ar"]
-[ext_resource type="PackedScene" uid="uid://dk2ly0pwano7l" path="res://scenes/hud.tscn" id="3_8uawu"]
+[ext_resource type="PackedScene" uid="uid://ca6p41qscy2ft" path="res://scenes/hud.tscn" id="3_8uawu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xreya"]
 

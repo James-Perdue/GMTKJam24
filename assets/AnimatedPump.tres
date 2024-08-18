@@ -1,0 +1,13 @@
+[gd_resource type="AnimatedTexture" load_steps=3 format=3 uid="uid://dvfyg7mtw0wh3"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qr2wp"]
+load_path = "res://.godot/imported/TempPump1.png-00f3b2633aeac390e78672943c7bd1f8.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pcsak"]
+load_path = "res://.godot/imported/TempPump2.png-e58a37c1eedc78c8144f254d54a18ab7.ctex"
+
+[resource]
+frames = 2
+frame_0/texture = SubResource("CompressedTexture2D_qr2wp")
+frame_1/texture = SubResource("CompressedTexture2D_pcsak")
+frame_1/duration = 1.0

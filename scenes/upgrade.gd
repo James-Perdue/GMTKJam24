@@ -57,7 +57,10 @@ func _subtract_food(amount):
 
 # Return a dictionary representation of the upgrades for use by other systems
 func to_dict():
-	return stat_dict
+	var stats_out = {}
+	for key in stat_dict.keys():
+		stats_out[key] = stat_dict[key].purchased
+	return stats_out
 	
 func _exit_button():
 	exit_scene.emit(self.food)
