@@ -1,5 +1,5 @@
 extends Area2D
-var speed = 100  # Adjust the speed as needed
+var speed = 150  # Adjust the speed as needed
 var target_position = Vector2()
 var color : String
 var lifeTime : int
