@@ -84,12 +84,15 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			return
 		if type == "colony":
 			hitColony(area.get_parent())
-
+	
 func hitColony(colony):
 	var totalDamage = len(cells) * damageMultiplier
-	var cellsKilled = floor(totalDamage / colony.cellDurability)
+	var cellsKilled = clamp(floor(totalDamage / colony.cellDurability), 0, len(colony.cells))
+	var potentialCells = range(0, cellsKilled)
+	for i in potentialCells:
+		colony.cells[i].killCell()
 	print(cellsKilled)
-	
+
 func _on_cell_died(cell: Area2D) -> void:
 	cells.erase(cell)
 	updateColony()
