@@ -1,6 +1,6 @@
 extends Node2D
 @export var initialCells := 1
-
+var cellDeath = preload("res://assets/Sounds/Squelch.wav")
 var Cell = preload("res://Cell.tscn")
 var perCellRadius = 15;
 
@@ -60,7 +60,7 @@ func spawnCell():
 	
 	
 func updateColony():
-	print("update")
+	#print("update")
 	self.colonyRadius = len(self.cells) * self.perCellRadius
 	if self.get_node("Area2D/CollisionShape2D").shape is CircleShape2D:
 		self.get_node("Area2D/CollisionShape2D").shape.radius = self.colonyRadius
@@ -91,9 +91,10 @@ func hitColony(colony):
 	var potentialCells = range(0, cellsKilled)
 	for i in potentialCells:
 		colony.cells[i].killCell()
-	print(cellsKilled)
+	#print(cellsKilled)
 
 func _on_cell_died(cell: Area2D) -> void:
+	play_new_sound(cellDeath)
 	cells.erase(cell)
 	updateColony()
 	if(len(cells) <= 0):
@@ -105,3 +106,8 @@ func _updateStats(new_food_total: int):
 		self.food = new_food_total
 		foodChanged.emit()
 	
+
+func play_new_sound(new_audio_stream):
+	var sound_player = $AudioStreamPlayer2D
+	sound_player.stream = new_audio_stream
+	sound_player.play()
