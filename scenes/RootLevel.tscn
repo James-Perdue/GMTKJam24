@@ -19,12 +19,9 @@ position = Vector2(617, 336)
 wait_time = 0.75
 autostart = true
 
-[node name="EnemyController" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
 position = Vector2(246, 244)
 script = ExtResource("4_r5ql3")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(246, 244)
 
 [connection signal="gameOver" from="PlayerController" to="." method="_on_player_controller_game_over"]
 [connection signal="timeout" from="FoodTimer" to="." method="_on_food_timer_timeout"]

@@ -30,14 +30,25 @@ func _ready() -> void:
 	self.cells = Array()
 	var circleShapeInstance = CircleShape2D.new()
 	self.get_node("Area2D/CollisionShape2D").shape = circleShapeInstance
+	self.get_node("CharacterBody2D/CollisionShape2D").shape = circleShapeInstance
 	for i in range(initialCells):
 		spawnCell()
 	#print(get_tree().current_scene)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position += velocity * delta
+	var character2D = self.get_node("CharacterBody2D")
+	#print('character2D.is_on_wall()', character2D.is_on_wall())
+	#if character2D.is_on_wall():
+		#position += character2D.get_wall_normal() * delta
+	#else:
+		#position += delta * velocity
 	#print(position)
+	
+	character2D.move(velocity * delta)
+	
+	#self.get_node("CharacterBody2D").move_and_slide()
+	#position += delta * velocity
 
 func move(direction: Vector2):
 	velocity = direction.normalized() * speed
@@ -64,6 +75,8 @@ func updateColony():
 	self.colonyRadius = len(self.cells) * self.perCellRadius
 	if self.get_node("Area2D/CollisionShape2D").shape is CircleShape2D:
 		self.get_node("Area2D/CollisionShape2D").shape.radius = self.colonyRadius
+	if self.get_node("CharacterBody2D/CollisionShape2D").shape is CircleShape2D:
+		self.get_node("CharacterBody2D/CollisionShape2D").shape.radius = self.colonyRadius
 	self.colonyUpdated.emit()
 		
 func get_random_point_in_circle(radius):
@@ -84,7 +97,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			return
 		if type == "colony":
 			hitColony(area.get_parent())
-	
+
 func hitColony(colony):
 	var totalDamage = len(cells) * damageMultiplier
 	var cellsKilled = clamp(floor(totalDamage / colony.cellDurability), 0, len(colony.cells))
