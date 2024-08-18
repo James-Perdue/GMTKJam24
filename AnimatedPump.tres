@@ -1,4 +1,4 @@
-[gd_resource type="AnimatedTexture" load_steps=3 format=3 uid="uid://c4en6thvg745n"]
+[gd_resource type="AnimatedTexture" load_steps=3 format=3 uid="uid://dvfyg7mtw0wh3"]
 
 [ext_resource type="Texture2D" uid="uid://dqnv4dpcafay4" path="res://assets/TempPump1.png" id="1_rw1yp"]
 [ext_resource type="Texture2D" uid="uid://iqjrh13fww3p" path="res://assets/TempPump2.png" id="2_8v06i"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c62ck1plnqff"
-path="res://.godot/imported/EdgeCorner.png-85a43f46598112c4f4f2ef16a5094e16.ctex"
+uid="uid://bd1bvht7ybulg"
+path="res://.godot/imported/EdgeCornerSmall.png-3e15768d02d587d2b76a2482080c77e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/EdgeCorner.png"
-dest_files=["res://.godot/imported/EdgeCorner.png-85a43f46598112c4f4f2ef16a5094e16.ctex"]
+source_file="res://assets/EdgeCornerSmall.png"
+dest_files=["res://.godot/imported/EdgeCornerSmall.png-3e15768d02d587d2b76a2482080c77e6.ctex"]
 
 [params]
 
