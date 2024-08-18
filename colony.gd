@@ -48,7 +48,9 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var character2D = self.get_node("CharacterBody2D")
+	#var character2D = self.get_node("CharacterBody2D")
+	
+	#Attempting to read collision and reaction from parent
 	#print('character2D.is_on_wall()', character2D.is_on_wall())
 	#if character2D.is_on_wall():
 		#position += character2D.get_wall_normal() * delta
@@ -56,10 +58,10 @@ func _process(delta: float) -> void:
 		#position += delta * velocity
 	#print(position)
 	
-	character2D.move(velocity * delta)
+	#Try to let child handle it
+	#character2D.move(velocity * delta)
 	
-	#self.get_node("CharacterBody2D").move_and_slide()
-	#position += delta * velocity
+	position += delta * velocity
 
 func move(direction: Vector2):
 	velocity = direction.normalized() * self.speed

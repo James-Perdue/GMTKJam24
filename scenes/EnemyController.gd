@@ -1,17 +1,24 @@
 extends Node2D
 var Colony = preload("res://Colony.tscn")
 var colony: Node2D
-var startPosition = Vector2(150, 256)
+var colonySettings = {
+		colonyColor = 'blue',
+		cellDurability = 5,
+		speed = 200,
+		damageMultiplier = 2,
+		startPosition = Vector2(20, 256)
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	colony = Colony.instantiate()
-	colony.colonyColor = "blue"
-	colony.position = startPosition
+	colony.colonyColor = colonySettings.colonyColor
+	colony.position = colonySettings.startPosition
 	colony.colonyDied.connect(_on_colony_die)
 	add_child(colony)
 	# Colony Specific Stats
-	colony.set_stats(200, 1.0, 0, 2)  # imagine my surprise when GDScript doesnt support named arguments
+	# Is there a need for this?
+	colony.set_stats(colonySettings.speed, colonySettings.damageMultiplier, 0, colonySettings.cellDurability)  # imagine my surprise when GDScript doesnt support named arguments
 	pass
 
 func _on_colony_die():
@@ -25,5 +32,5 @@ func _process(delta: float) -> void:
 		if abs(direction.x) < 400 && abs(direction.y) < 400:
 			colony.move(direction)
 		else:
-			colony.move(startPosition - colony.global_position)
+			colony.move(colonySettings.startPosition - colony.global_position)
 	pass
