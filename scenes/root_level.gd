@@ -57,3 +57,9 @@ func _on_food_timer_timeout() -> void:
 func _on_player_controller_game_over(won: bool) -> void:
 	$FoodTimer.stop()
 	$FoodTimer.queue_free() # Replace with function body.
+
+
+func _start_music():
+	$background_music.stream = bkgnd_music
+	$background_music.play()
+	

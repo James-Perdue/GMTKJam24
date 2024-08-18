@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dxqg3xqdc12jf"
+path="res://.godot/imported/GMTKJam24 Edit 1 Export 1.mp3-4dd215922876a030bd0f4ad166eca1eb.mp3str"
+
+[deps]
+
+source_file="res://music/GMTKJam24/Exported/GMTKJam24 Edit 1 Export 1.mp3"
+dest_files=["res://.godot/imported/GMTKJam24 Edit 1 Export 1.mp3-4dd215922876a030bd0f4ad166eca1eb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
