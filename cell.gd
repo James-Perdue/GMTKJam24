@@ -20,7 +20,10 @@ func _ready() -> void:
 	
 	if(lifeTime > 0):
 		await get_tree().create_timer(lifeTime).timeout
-		queue_free()
+		killCell()
+
+func killCell():
+	queue_free()
 	
 func move_to_target():
 	var direction = (target_position - position).normalized()

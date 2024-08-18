@@ -10,18 +10,20 @@ func _ready() -> void:
 	colony.speed = 200
 	colony.position = startPosition
 	colony.cellLifeTime = 0
+	colony.colonyDied.connect(_on_colony_die)
 	add_child(colony)
 	pass
 
+func _on_colony_die():
+	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var player = get_parent().get_node('PlayerController')
-	if player:
+	if player and player.get_node('Colony'):
 		var direction = player.get_node('Colony').global_position - colony.global_position
 		if abs(direction.x) < 400 && abs(direction.y) < 400:
 			colony.move(direction)
 		else:
 			colony.move(startPosition - colony.global_position)
-	print(colony.get_node("Area2D/CollisionShape2D").shape.radius)
 	pass
