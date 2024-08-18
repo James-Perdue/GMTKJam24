@@ -16,6 +16,7 @@ tile_set = ExtResource("3_rx04a")
 position = Vector2(617, 336)
 
 [node name="FoodTimer" type="Timer" parent="."]
+process_mode = 1
 wait_time = 0.75
 autostart = true
 

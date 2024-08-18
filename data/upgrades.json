@@ -6,32 +6,37 @@
 	},
 	"Toughness": {
 		"Description": "A thicker cell wall means this cell can take more damage",
-		"Base Cost": 100,
+		"Base Cost": 10,
 		"Scalar": 1.1
 	},
 	"Agility": {
 		"Description": "Cillia on the sides of the cells increase their ability to turn and accelerate",
-		"Base Cost": 100,
+		"Base Cost": 10,
 		"Scalar": 1.1
 	},
 	"Lifespan": {
 		"Description": "Adapt this cell to a longer lifespan",
-		"Base Cost": 200,
-		"Scalar": 1.1
+		"Base Cost": 5,
+		"Scalar": 1.4
 	},
 	"Mitosis Cost": {
 		"Description": "Additional centrosomes make it easier for this cell to reproduce",
-		"Base Cost": 100,
+		"Base Cost": 20,
 		"Scalar": 2.0
 	},
 	"Surface Antigens": {
 		"Description": "Improved surface antigens cause more contact damage to other cells",
-		"Base Cost": 100,
+		"Base Cost": 10,
 		"Scalar": 1.2
 	},
 	"Antibodies": {
 		"Description": "Stronger antibodies deal damage at a distance",
 		"Base Cost": 100,
 		"Scalar": 1.3
+	},
+	"Food Efficiency": {
+		"Description": "Aerobic Respiration means every sugar molecule goes further",
+		"Base Cost": 100,
+		"Scalar": 1.5
 	}
 }
