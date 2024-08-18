@@ -6,12 +6,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_kfj7t"]
 radius = 10.9949
 
-[node name="Food" type="Area2D"]
-scale = Vector2(1.5, 1.5)
+[node name="Food" type="StaticBody2D"]
 script = ExtResource("1_pyuyo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_jkf5f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_kfj7t")

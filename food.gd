@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 
 var isFood = true
 var nutrition: int

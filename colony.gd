@@ -1,29 +1,30 @@
-extends Node2D
+extends CharacterBody2D
+
+var SPEED = 200
+
 @export var initialCells := 1
-var cellDeath = preload("res://assets/Sounds/Squelch.wav")
 var Cell = preload("res://Cell.tscn")
-var perCellRadius = 15;
+var perCellRadius = 3;
 
 var colonyRadius: int
-var velocity = Vector2.ZERO
 var cells = []
 var food = 0
 var colonyColor : String = "red"
 
 #Upgradeable Stats
-const d_speed = 400
-const d_damage_multiplier = 1.0
-const d_cell_lifetime = 20
-const d_cell_durability = 2
-const d_food_efficiency = 1.0
-const d_split_cost = 5
+var d_speed = 400
+var d_damage_multiplier = 1.0
+var d_cell_lifetime = 20
+var d_cell_durability = 2
+var d_food_efficiency = 1.0
+var d_split_cost = 5
 
-var speed
-var damageMultiplier
-var cellLifeTime
-var cellDurability
-var food_efficiency
-var split_cost
+var speed : int = d_speed
+var damageMultiplier : float = d_damage_multiplier
+var cellLifeTime : int = d_cell_lifetime
+var cellDurability : int = d_cell_durability
+var food_efficiency : float = d_food_efficiency
+var split_cost : int = d_split_cost
 
 signal colonyUpdated()
 signal cellDied(cell : Area2D)
@@ -33,35 +34,37 @@ signal colonyDied()
 func _init() -> void:
 	pass
 	
+func _physics_process(delta: float) -> void:
+	var collision = move_and_collide(velocity * delta)
+	if(collision):
+		var collider = collision.get_collider()
+		if collider.has_meta("type"):
+			var type = collider.get_meta("type")
+			if type == "food":
+				food += collider.get_nutrition() * self.food_efficiency
+				collider.queue_free()
+				foodChanged.emit(food)
+				return
+			if type == "colony":
+				hitColony(collider)
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Area2D.set_meta("type", "colony")
+	self.set_meta("type", "colony")
 	self.cells = Array()
 	var circleShapeInstance = CircleShape2D.new()
 	self.get_node("Area2D/CollisionShape2D").shape = circleShapeInstance
-	self.get_node("CharacterBody2D/CollisionShape2D").shape = circleShapeInstance
-	self.set_stats()  # set stats using default
+	self.get_node("CollisionShape2D").shape = circleShapeInstance
+	#self.set_stats()  # set stats using default, this wipes out any settings by controller, so commenting out
+	
+	print( "cell" + str(cellLifeTime))
 	for i in range(initialCells):
 		self.spawnCell(cellLifeTime)
 	#print(get_tree().current_scene)
-
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#var character2D = self.get_node("CharacterBody2D")
-	
-	#Attempting to read collision and reaction from parent
-	#print('character2D.is_on_wall()', character2D.is_on_wall())
-	#if character2D.is_on_wall():
-		#position += character2D.get_wall_normal() * delta
-	#else:
-		#position += delta * velocity
-	#print(position)
-	
-	#Try to let child handle it
-	#character2D.move(velocity * delta)
-	
-	position += delta * velocity
+#func _process(_delta: float) -> void:
+	#pass
 
 func move(direction: Vector2):
 	velocity = direction.normalized() * self.speed
@@ -72,6 +75,7 @@ func splitCell():
 		spawnCell(self.cellLifeTime)
 		
 func spawnCell(cell_life_time):
+	print(cellLifeTime)
 	var cellInstance = Cell.instantiate()
 	cellInstance.color = colonyColor
 	cellInstance.initialize(0, colonyColor, cell_life_time)
@@ -88,8 +92,8 @@ func updateColony():
 	self.colonyRadius = len(self.cells) * self.perCellRadius
 	if self.get_node("Area2D/CollisionShape2D").shape is CircleShape2D:
 		self.get_node("Area2D/CollisionShape2D").shape.radius = self.colonyRadius
-	if self.get_node("CharacterBody2D/CollisionShape2D").shape is CircleShape2D:
-		self.get_node("CharacterBody2D/CollisionShape2D").shape.radius = self.colonyRadius
+	if self.get_node("CollisionShape2D").shape is CircleShape2D:
+		self.get_node("CollisionShape2D").shape.radius = self.colonyRadius
 	self.colonyUpdated.emit()
 		
 func get_random_point_in_circle(radius):
@@ -99,17 +103,16 @@ func get_random_point_in_circle(radius):
 	var y = r * sin(angle)
 	return Vector2(x, y)
 
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.has_meta("type"):
-		var type = area.get_meta("type")
-		if type == "food":
-			food += area.get_nutrition() * self.food_efficiency
-			area.queue_free()
-			foodChanged.emit(food)
-			return
-		if type == "colony":
-			hitColony(area.get_parent())
+#func _on_area_2d_area_entered(area: Area2D) -> void:
+	#if area.has_meta("type"):
+		#var type = area.get_meta("type")
+		#if type == "food":
+			#food += area.get_nutrition() * self.food_efficiency
+			#area.queue_free()
+			#foodChanged.emit(food)
+			#return
+		#if type == "colony":
+			#hitColony(area.get_parent())
 
 func hitColony(colony):
 	var totalDamage = len(cells) * self.damageMultiplier
@@ -120,7 +123,7 @@ func hitColony(colony):
 	#print(cellsKilled)
 
 func _on_cell_died(cell: Area2D) -> void:
-	play_new_sound(cellDeath)
+	AudioManager.play_sound("Squelch", 1)
 	cells.erase(cell)
 	updateColony()
 	if(len(cells) <= 0):
@@ -145,14 +148,10 @@ func _updateStats(new_food_total: int, new_stats: Dictionary):
 # Imagine my surprise when calling parameters by names isn't a thing in GDScript
 func set_stats(n_speed=d_speed, n_damage_multiplier=d_damage_multiplier, n_cell_lifetime=d_cell_lifetime,
 			   n_cell_durability=d_cell_durability, n_fe=d_food_efficiency, n_sc=d_split_cost):
+	#print("SetStats")
 	self.speed = n_speed
 	self.damageMultiplier = n_damage_multiplier
 	self.cellLifeTime = n_cell_lifetime
 	self.cellDurability = n_cell_durability
 	self.food_efficiency = n_fe
 	self.split_cost = n_sc
-
-func play_new_sound(new_audio_stream):
-	var sound_player = $AudioStreamPlayer2D
-	sound_player.stream = new_audio_stream
-	sound_player.play()
