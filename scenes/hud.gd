@@ -3,7 +3,7 @@ extends Control
 
 var upgrade_scene = preload("res://scenes/upgrade.tscn")
 var upgrade_loaded
-signal upgraded(new_food)
+signal upgraded(new_food, upgrade_dict)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,7 +34,7 @@ func _close_screen(new_food):
 	self.upgrade_loaded.hide()
 	get_tree().paused = false
 	self.set_food(new_food)
-	self.upgraded.emit(new_food)  # Signal going back up to colony
+	self.upgraded.emit(new_food, self.upgrade_loaded.to_dict())  # Signal going back up to colony
 
 func set_food(new_food: int):
 	self.upgrade_loaded.food = new_food
