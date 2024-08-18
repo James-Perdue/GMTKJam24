@@ -1,17 +1,17 @@
 extends Node2D
 
 var audio_players = {}
-var music_player: AudioStreamPlayer2D
+var music_player: AudioStreamPlayer
 
 func _ready():
-	music_player = AudioStreamPlayer2D.new()
+	music_player = AudioStreamPlayer.new()
 	add_child(music_player)
 
 func play_sound(sound_name: String, volume_db: float = 0.0):
 	if sound_name in audio_players:
 		audio_players[sound_name].play()
 	else:
-		var player = AudioStreamPlayer2D.new()
+		var player = AudioStreamPlayer.new()
 		player.stream = load("res://assets/Sounds/" + sound_name + ".wav")
 		player.volume_db = volume_db
 		add_child(player)

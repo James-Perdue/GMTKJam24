@@ -3,6 +3,7 @@ var speed = 150  # Adjust the speed as needed
 var target_position = Vector2()
 var color : String
 var lifeTime : int
+var lifeRemaining : float
 
 @onready var cellAnim = $CellAnimation;
 func initialize(newSpeed : int, newColor : String, newLifeTime : int) -> void:
@@ -17,7 +18,7 @@ func _ready() -> void:
 	randomize()
 	target_position = get_parent().get_random_point_in_circle(get_parent().colonyRadius)
 	move_to_target()
-	
+	lifeRemaining = lifeTime
 	if(lifeTime > 0):
 		await get_tree().create_timer(lifeTime, false).timeout
 		killCell()
@@ -31,7 +32,10 @@ func move_to_target():
 	if position.distance_to(target_position) < speed * get_process_delta_time():
 		target_position = get_parent().get_random_point_in_circle(get_parent().colonyRadius)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	if(lifeRemaining != 0):
+		lifeRemaining -= delta
+		cellAnim.modulate = Color(.5,.5,.5).lerp(Color(color), lifeRemaining / lifeTime)
 	move_to_target()
 	
 func _exit_tree() -> void:

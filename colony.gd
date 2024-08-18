@@ -5,7 +5,7 @@ var SPEED = 200
 @export var initialCells := 1
 var Cell = preload("res://Cell.tscn")
 var perCellRadius = 3;
-
+var minColonyRadius = 10
 var colonyRadius: int
 var cells = []
 var food = 0
@@ -38,6 +38,7 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
 	if(collision):
 		var collider = collision.get_collider()
+		#print(collider.name)
 		if collider.has_meta("type"):
 			var type = collider.get_meta("type")
 			if type == "food":
@@ -53,11 +54,9 @@ func _ready() -> void:
 	self.set_meta("type", "colony")
 	self.cells = Array()
 	var circleShapeInstance = CircleShape2D.new()
-	self.get_node("Area2D/CollisionShape2D").shape = circleShapeInstance
 	self.get_node("CollisionShape2D").shape = circleShapeInstance
 	#self.set_stats()  # set stats using default, this wipes out any settings by controller, so commenting out
 	
-	print( "cell" + str(cellLifeTime))
 	for i in range(initialCells):
 		self.spawnCell(cellLifeTime)
 	#print(get_tree().current_scene)
@@ -75,7 +74,6 @@ func splitCell():
 		spawnCell(self.cellLifeTime)
 		
 func spawnCell(cell_life_time):
-	print(cellLifeTime)
 	var cellInstance = Cell.instantiate()
 	cellInstance.color = colonyColor
 	cellInstance.initialize(0, colonyColor, cell_life_time)
@@ -89,11 +87,10 @@ func spawnCell(cell_life_time):
 	
 func updateColony():
 	#print("update")
-	self.colonyRadius = len(self.cells) * self.perCellRadius
-	if self.get_node("Area2D/CollisionShape2D").shape is CircleShape2D:
-		self.get_node("Area2D/CollisionShape2D").shape.radius = self.colonyRadius
+	self.colonyRadius = max(log(len(self.cells)) / log(1.05) + 2 * self.perCellRadius, 0)
+	#print(colonyRadius)
 	if self.get_node("CollisionShape2D").shape is CircleShape2D:
-		self.get_node("CollisionShape2D").shape.radius = self.colonyRadius
+		self.get_node("CollisionShape2D").shape.radius = minColonyRadius + self.colonyRadius
 	self.colonyUpdated.emit()
 		
 func get_random_point_in_circle(radius):
