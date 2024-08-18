@@ -40,6 +40,10 @@ func _process(_delta: float) -> void:
 	colony.move(input_vector)
 
 
+# Return camera node - used for resetting food spawning after newgame
+func get_camera():
+	return $Colony/Camera2D
+
 func _on_colony_colony_died() -> void:
 	gameOver.emit(false)
 	queue_free()

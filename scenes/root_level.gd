@@ -32,6 +32,9 @@ func _ready() -> void:
 	player = $PlayerController
 	camera = $PlayerController/Colony/Camera2D
 	initializeEnemies()
+	$game_over.new_game.connect(self._start_new_game)
+	player.gameOver.connect(self._on_player_controller_game_over)
+
 
 # Fix the control node size (containers really don't like being a child of Node2D)
 func initializeEnemies() -> void:
@@ -52,8 +55,25 @@ func _on_food_timer_timeout() -> void:
 		add_child(foodInstance)
 		foodInstance.position.x = x
 		foodInstance.position.y = y
-
+		foodInstance.add_to_group("foods")
 
 func _on_player_controller_game_over(won: bool) -> void:
+	# Stop Food Spawning
 	$FoodTimer.stop()
-	$FoodTimer.queue_free() # Replace with function body.
+	# Remove all existing food
+	for food in get_tree().get_nodes_in_group("foods"):
+		food.queue_free()
+	# Create the game over screen
+	$game_over.show_game_over(won)
+	
+func _start_new_game():
+	print("Starting ...")
+	# Clear the game over scene
+	$game_over.hide()
+	# Destroy and create Player Controller
+	player = PlayerController.instantiate()
+	self.add_child(player)
+	player.gameOver.connect(self._on_player_controller_game_over)
+	camera = player.get_camera()
+	# Restart Food Timer
+	$FoodTimer.start()

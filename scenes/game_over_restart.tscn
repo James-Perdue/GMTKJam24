@@ -1,0 +1,180 @@
+[gd_scene load_steps=15 format=3 uid="uid://b26ov37i1p072"]
+
+[ext_resource type="Texture2D" uid="uid://ddlgmthbhq10i" path="res://art/temp_bkgnd.png" id="1_la3d0"]
+[ext_resource type="Script" path="res://scenes/game_over_restart.gd" id="2_6u530"]
+[ext_resource type="Texture2D" uid="uid://dhh7borlfgxlc" path="res://art/unpressed_button.png" id="3_bu8gl"]
+[ext_resource type="Texture2D" uid="uid://i5yp0dcbxm6" path="res://art/pressed_button.png" id="4_2t5pe"]
+[ext_resource type="Texture2D" uid="uid://buij1vv5q652e" path="res://art/temp_button_bkgnd.png" id="4_aqujh"]
+[ext_resource type="Texture2D" uid="uid://2tf23y4l4fjd" path="res://art/disabled_button.png" id="5_gl5ju"]
+[ext_resource type="Texture2D" uid="uid://bhdeol5mcbf01" path="res://art/exit.png" id="5_m6npn"]
+[ext_resource type="Texture2D" uid="uid://dcunn71mak0qd" path="res://art/pressed_exit.png" id="6_hbbud"]
+
+[sub_resource type="Theme" id="Theme_h7hwf"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_uktgr"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_2wtdw"]
+events = [SubResource("InputEventKey_uktgr")]
+
+[sub_resource type="Shortcut" id="Shortcut_gfq7k"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_r5fhj"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="Shortcut" id="Shortcut_juuud"]
+events = [SubResource("InputEventKey_r5fhj")]
+
+[node name="game_over" type="TextureRect"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_la3d0")
+expand_mode = 2
+script = ExtResource("2_6u530")
+metadata/_edit_lock_ = true
+
+[node name="title_block" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.05
+anchor_right = 0.975
+anchor_bottom = 0.25
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_aqujh")
+expand_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="rich_text" type="RichTextLabel" parent="title_block"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][font_size=94]INFECTION[/font_size][/center]"
+scroll_active = false
+
+[node name="resource_display" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.255
+anchor_right = 0.975
+anchor_bottom = 0.355
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_aqujh")
+expand_mode = 2
+
+[node name="rich_text" type="RichTextLabel" parent="resource_display"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][font_size=46][color=red] GAME OVER! [/color] Click [New Game] to try again. [/font_size][/center]"
+
+[node name="upgrade_grid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.4
+anchor_right = 0.9
+anchor_bottom = 0.95
+theme = SubResource("Theme_h7hwf")
+
+[node name="new_game" type="PanelContainer" parent="upgrade_grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="TextureButton" parent="upgrade_grid/new_game"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_2wtdw")
+texture_normal = ExtResource("3_bu8gl")
+texture_pressed = ExtResource("4_2t5pe")
+texture_disabled = ExtResource("5_gl5ju")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="upgrade_grid/new_game"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "
+
+[center][color=black]NEW GAME[/color][/center]"
+
+[node name="controls" type="PanelContainer" parent="upgrade_grid"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="TextureButton" parent="upgrade_grid/controls"]
+layout_mode = 2
+texture_normal = ExtResource("3_bu8gl")
+texture_pressed = ExtResource("4_2t5pe")
+texture_disabled = ExtResource("5_gl5ju")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="upgrade_grid/controls"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "
+
+[center][color=black]CONTROLS[/color][/center]"
+
+[node name="leaderboard" type="PanelContainer" parent="upgrade_grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="TextureButton" parent="upgrade_grid/leaderboard"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_gfq7k")
+texture_normal = ExtResource("3_bu8gl")
+texture_pressed = ExtResource("4_2t5pe")
+texture_disabled = ExtResource("5_gl5ju")
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="upgrade_grid/leaderboard"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "
+
+[center][color=black]LEADERBOARDS[/color][/center]"
+
+[node name="exit_cont" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+alignment_horizontal = 2
+alignment_vertical = 2
+
+[node name="exit_button" type="TextureButton" parent="exit_cont"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_juuud")
+texture_normal = ExtResource("5_m6npn")
+texture_pressed = ExtResource("6_hbbud")
