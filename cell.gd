@@ -19,7 +19,7 @@ func _ready() -> void:
 	move_to_target()
 	
 	if(lifeTime > 0):
-		await get_tree().create_timer(lifeTime).timeout
+		await get_tree().create_timer(lifeTime, false).timeout
 		killCell()
 
 func killCell():

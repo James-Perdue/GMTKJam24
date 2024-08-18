@@ -7,11 +7,11 @@ var startPosition = Vector2(150, 256)
 func _ready() -> void:
 	colony = Colony.instantiate()
 	colony.colonyColor = "blue"
-	colony.speed = 200
 	colony.position = startPosition
-	colony.cellLifeTime = 0
 	colony.colonyDied.connect(_on_colony_die)
 	add_child(colony)
+	# Colony Specific Stats
+	colony.set_stats(200, 1.0, 0, 2)  # imagine my surprise when GDScript doesnt support named arguments
 	pass
 
 func _on_colony_die():
