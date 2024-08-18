@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ca6p41qscy2ft"]
+[gd_scene load_steps=16 format=3 uid="uid://dk2ly0pwano7l"]
 
 [ext_resource type="Texture2D" uid="uid://dhh7borlfgxlc" path="res://art/unpressed_button.png" id="1_4b7i3"]
 [ext_resource type="Script" path="res://scenes/hud.gd" id="1_5gfgc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://i5yp0dcbxm6" path="res://art/pressed_button.png" id="2_03vw8"]
 [ext_resource type="Texture2D" uid="uid://2tf23y4l4fjd" path="res://art/disabled_button.png" id="3_xenk4"]
 [ext_resource type="Script" path="res://scenes/fpsLabel.gd" id="6_nlag6"]
+[ext_resource type="Texture2D" uid="uid://drdx5gskhfi5b" path="res://art/volume.png" id="7_jhldv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p52n4"]
 
@@ -27,6 +28,14 @@ unicode = 109
 
 [sub_resource type="Shortcut" id="Shortcut_jagvd"]
 events = [SubResource("InputEventKey_88m7c")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_y0xdq"]
+device = -1
+keycode = 78
+unicode = 110
+
+[sub_resource type="Shortcut" id="Shortcut_46mqe"]
+events = [SubResource("InputEventKey_y0xdq")]
 
 [node name="hud" type="Control"]
 layout_mode = 3
@@ -135,3 +144,45 @@ expand_mode = 2
 layout_mode = 2
 bbcode_enabled = true
 script = ExtResource("6_nlag6")
+
+[node name="volume_control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Button" type="TextureButton" parent="volume_control"]
+layout_mode = 2
+offset_right = 50.0
+offset_bottom = 50.0
+size_flags_horizontal = 0
+shortcut = SubResource("Shortcut_46mqe")
+texture_normal = ExtResource("7_jhldv")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="volume_control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -105.0
+offset_top = -50.0
+offset_right = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HSlider" type="HSlider" parent="volume_control/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.5
+step = 0.01
+value = 1.0

@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://clhgopfoq7iyb" path="res://PlayerController.tscn" id="1_lfa0c"]
 [ext_resource type="TileSet" uid="uid://ck5vcsja7w6n0" path="res://IntestineTiles.tres" id="3_rx04a"]
 [ext_resource type="Script" path="res://scenes/EnemyController.gd" id="4_r5ql3"]
-[ext_resource type="AudioStream" uid="uid://dxqg3xqdc12jf" path="res://music/GMTKJam24/Exported/GMTKJam24 Edit 1 Export 1.mp3" id="5_mlif5"]
 
 [node name="RootLevel" type="Node2D"]
 script = ExtResource("1_2vcth")
