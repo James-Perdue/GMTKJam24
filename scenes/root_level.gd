@@ -154,7 +154,15 @@ var enemiesLvl1Area1 = [
 	}
 	
 ]
-
+var enemiesLvl2Area1 = [
+	{
+		colonyColor = 'brown',
+		cellDurability = 10,
+		speed = 200,
+		damageMultiplier = 4,
+		startPosition = Vector2(2000, 200),
+		numCells = 10
+	}]
 var player
 var camera
 var game_over
@@ -196,16 +204,18 @@ func _on_food_timer_timeout() -> void:
 func _on_player_controller_game_over(won: bool) -> void:
 	# Stop Food Spawning
 	$FoodTimer.stop()
-	# Remove all existing food
+	cleanUp()
+	# Create the game over screen
+	game_over.show_game_over(won)
+	
+func cleanUp():
 	for food in get_tree().get_nodes_in_group("foods"):
 		food.queue_free()
 	# Reset all enemies
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		print("Clearing enemy %s" % enemy)
 		enemy.queue_free()
-	# Create the game over screen
-	game_over.show_game_over(won)
-	
+
 func _start_new_game():
 	print("Starting ...")
 	# Clear the game over scene
@@ -225,5 +235,14 @@ func _start_new_game():
 func change_level(levelNumber: int):
 	var newLevel = tileMaps["level" + str(levelNumber)].instantiate()
 	print("newLevel", newLevel)
+	cleanUp()
 	self.get_child(0).replace_by(newLevel)
 	self.get_node('PlayerController').get_node('Colony').global_position = Vector2(617, 336)
+	if(newLevel.name == "Lv2TileMap"):
+		for enemy in enemiesLvl2Area1:
+			print('enemy', enemy)
+			var initializedEnemy = EnemyController.instantiate()
+			initializedEnemy.colonySettings = enemy 
+			add_child(initializedEnemy)
+			initializedEnemy.add_to_group("enemy")
+	
