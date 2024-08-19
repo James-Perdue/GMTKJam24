@@ -32,11 +32,13 @@ var enemies = [
 
 var player
 var camera
+var game_over
 func _ready() -> void:
 	player = $PlayerController
 	camera = $PlayerController/Colony/Camera2D
 	initializeEnemies()
-	$game_over.new_game.connect(self._start_new_game)
+	game_over = $game_over_canvas/game_over
+	game_over.new_game.connect(self._start_new_game)
 	player.gameOver.connect(self._on_player_controller_game_over)
 
 
@@ -77,12 +79,12 @@ func _on_player_controller_game_over(won: bool) -> void:
 		print("Clearing enemy %s" % enemy)
 		enemy.queue_free()
 	# Create the game over screen
-	$game_over.show_game_over(won)
+	game_over.show_game_over(won)
 	
 func _start_new_game():
 	print("Starting ...")
 	# Clear the game over scene
-	$game_over.hide()
+	game_over.hide()
 	# Destroy and create Player Controller
 	player = PlayerController.instantiate()
 	self.add_child(player)

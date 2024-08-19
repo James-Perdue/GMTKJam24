@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://bi6jxqt6hd7os"]
+
+[ext_resource type="Texture2D" uid="uid://ddlgmthbhq10i" path="res://art/temp_bkgnd.png" id="1_coysb"]
+[ext_resource type="Script" path="res://scenes/mutations.gd" id="2_jleba"]
+[ext_resource type="PackedScene" uid="uid://ba87lu41ee5nj" path="res://scenes/single_mutation.tscn" id="3_jewui"]
+[ext_resource type="Texture2D" uid="uid://buij1vv5q652e" path="res://art/temp_button_bkgnd.png" id="4_dnd4b"]
+[ext_resource type="Texture2D" uid="uid://bhdeol5mcbf01" path="res://art/exit.png" id="5_l66op"]
+[ext_resource type="Texture2D" uid="uid://dcunn71mak0qd" path="res://art/pressed_exit.png" id="6_ohhk4"]
+
+[sub_resource type="Theme" id="Theme_h7hwf"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_r5fhj"]
+device = -1
+keycode = 88
+unicode = 120
+
+[sub_resource type="Shortcut" id="Shortcut_mnc2t"]
+events = [SubResource("InputEventKey_r5fhj")]
+
+[node name="mutation_screen" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_coysb")
+expand_mode = 2
+script = ExtResource("2_jleba")
+upgrade_option = ExtResource("3_jewui")
+metadata/_edit_lock_ = true
+
+[node name="title_block" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.05
+anchor_right = 0.975
+anchor_bottom = 0.15
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_dnd4b")
+expand_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="rich_text" type="RichTextLabel" parent="title_block"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+
+[node name="resource_display" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.155
+anchor_right = 0.975
+anchor_bottom = 0.255
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_dnd4b")
+expand_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="rich_text" type="RichTextLabel" parent="resource_display"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+
+[node name="upgrade_grid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.3
+anchor_right = 0.975
+anchor_bottom = 0.95
+theme = SubResource("Theme_h7hwf")
+
+[node name="exit_cont" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+alignment_horizontal = 2
+alignment_vertical = 2
+
+[node name="exit_button" type="TextureButton" parent="exit_cont"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_mnc2t")
+texture_normal = ExtResource("5_l66op")
+texture_pressed = ExtResource("6_ohhk4")
