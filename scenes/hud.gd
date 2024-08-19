@@ -5,6 +5,12 @@ var upgrade_scene = preload("res://scenes/upgrade.tscn")
 var upgrade_loaded
 signal upgraded(new_food, upgrade_dict)
 
+# Volume values and textures
+var is_muted = false
+var tex_unmuted = preload("res://art/volume.png")
+var tex_muted = preload("res://art/muted.png")
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.upgrade_loaded = upgrade_scene.instantiate()
@@ -13,6 +19,8 @@ func _ready() -> void:
 	self.upgrade_loaded.process_mode = PROCESS_MODE_ALWAYS
 	$mutations/Button.pressed.connect(self._mutate)
 	$upgrades/Button.pressed.connect(self._upgrade)
+	$volume_control/Button.pressed.connect(self._toggle_mute)
+	$volume_control/PanelContainer/HSlider.value_changed.connect(self._change_volume)
 	self.upgrade_loaded.exit_scene.connect(self._close_screen)
 
 
@@ -43,3 +51,18 @@ func set_food(new_food: int):
 
 func update_count(new_count: int):
 	$cell_count/RichTextLabel.text = "[color=black]CELLS: %d[/color]" % new_count
+
+func _toggle_mute():
+	print("Toggled Function")
+	# Toggle muting
+	self.is_muted = not self.is_muted
+	if self.is_muted:
+		$volume_control/Button.texture_normal = tex_muted
+	else:
+		$volume_control/Button.texture_normal = tex_unmuted
+	AudioManager.mute(self.is_muted)
+
+func _change_volume(new_vol_lin: float):
+	# Change Volume Value (returns value in dB)
+	var new_vol_db = linear_to_db(new_vol_lin)
+	AudioManager.set_master_volume(new_vol_db)

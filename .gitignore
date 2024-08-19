@@ -3,3 +3,5 @@
 exports/
 scenes/*.tmp
 addons/
+# Music Maker Project Files
+music/GMTKJam24/

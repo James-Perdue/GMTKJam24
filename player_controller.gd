@@ -3,6 +3,10 @@ var colony: Node2D
 
 signal gameOver(won : bool)
 var hud: HeadsUp
+signal mute(is_muted: bool)
+signal vol_change(new_volume: float)
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	colony = $Colony
