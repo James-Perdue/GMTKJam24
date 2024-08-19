@@ -158,7 +158,7 @@ func _on_cell_died(cell: Area2D) -> void:
 func _updateStats(new_food_total: int, new_stats: Dictionary):
 	if(food != new_food_total):
 		self.food = new_food_total
-		foodChanged.emit()
+		foodChanged.emit(self.food)
 	# Scale stats based on number of owned upgrades
 	print(new_stats)
 	var new_speed = d_speed + new_stats["Additional Cilia"] * 200
@@ -173,7 +173,7 @@ func _update_mutations(new_food_total: int, new_muts: Dictionary):
 	print(new_muts)
 	if(food != new_food_total):
 		self.food = new_food_total
-		foodChanged.emit()
+		foodChanged.emit(self.food)
 	self.can_flagellate = new_muts["Flagellate"]
 
 
