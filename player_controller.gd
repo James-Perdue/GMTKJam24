@@ -15,6 +15,7 @@ func _ready() -> void:
 	colony = $Colony
 	hud = $Colony/CanvasLayer/hud_cont/hud
 	hud.set_food(colony.food)
+	colony.set_meta("isPlayer", true)
 	hud.update_count(len(colony.cells))
 	hud.upgraded.connect(colony._updateStats)
 	heldSplitTimer = Timer.new()
