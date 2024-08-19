@@ -7,7 +7,7 @@ var tileMaps = {
 	level2 = preload("res://levels/Lv2TileMap.tscn")
 }
 
-var enemies = [
+var enemiesLvl1Area1 = [
 	{
 		colonyColor = 'blue',
 		cellDurability = 5,
@@ -115,10 +115,42 @@ var enemies = [
 	{
 		colonyColor = 'cyan',
 		cellDurability = 10,
-		speed = 500,
+		speed = 600,
 		damageMultiplier = 15,
 		startPosition = Vector2(-3355, -1292),
 		numCells = 2
+	},
+	{
+		colonyColor = 'green',
+		cellDurability = 3,
+		speed = 300,
+		damageMultiplier = 1,
+		startPosition = Vector2(-3347, -3322),
+		numCells = 100
+	},
+	{
+		colonyColor = 'green',
+		cellDurability = 3,
+		speed = 300,
+		damageMultiplier = 1,
+		startPosition = Vector2(-2300, -3344),
+		numCells = 100
+	},
+	{
+		colonyColor = 'black',
+		cellDurability = 5,
+		speed = 100,
+		damageMultiplier = 10,
+		startPosition = Vector2(-1083, -3301),
+		numCells = 75
+	},
+	{
+		colonyColor = 'blue',
+		cellDurability = 5,
+		speed = 200,
+		damageMultiplier = 2,
+		startPosition = Vector2(-36, -3322),
+		numCells = 150
 	}
 	
 ]
@@ -137,7 +169,7 @@ func _ready() -> void:
 
 func initializeEnemies() -> void:
 	if(true):
-		for enemy in enemies:
+		for enemy in enemiesLvl1Area1:
 			print('enemy', enemy)
 			var initializedEnemy = EnemyController.instantiate()
 			initializedEnemy.colonySettings = enemy 

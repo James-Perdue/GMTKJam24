@@ -156,7 +156,7 @@ func _on_cell_died(cell: Area2D) -> void:
 	if(randf() < .001):
 		AudioManager.play_sound("manly_scream_1", 1)
 	else:
-		AudioManager.play_sound("Squelch", 1)
+		AudioManager.play_sound("Squelch", .8)
 	cells.erase(cell)
 	updateColony()
 	if(len(cells) <= 0):
