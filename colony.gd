@@ -28,6 +28,8 @@ var split_cost : int = d_split_cost
 
 var stunned = false
 var flagellating = false
+# Unlockable Mutations
+var can_flagellate := false
 
 signal colonyUpdated()
 signal cellDied(cell : Area2D)
@@ -107,6 +109,8 @@ func get_random_point_in_circle(radius):
 	return Vector2(x, y)
 
 func flagellate():
+	if not self.can_flagellate:
+		return
 	if(flagellating):
 		return
 	flagellating = true
@@ -164,6 +168,14 @@ func _updateStats(new_food_total: int, new_stats: Dictionary):
 	var new_fe = d_food_efficiency + new_stats["Food Efficiency"] * 1.5
 	var new_sc = max(1, d_split_cost - new_stats["Mitosis Cost"])  # Don't want negative split cost
 	self.set_stats(new_speed, new_dam	, new_lifetime, new_durability, new_fe, new_sc)
+
+func _update_mutations(new_food_total: int, new_muts: Dictionary):
+	print(new_muts)
+	if(food != new_food_total):
+		self.food = new_food_total
+		foodChanged.emit()
+	self.can_flagellate = new_muts["Flagellate"]
+
 
 # Nice setter for doing enemy stat blocks and stuff. Uses default values if not explicit
 # Imagine my surprise when calling parameters by names isn't a thing in GDScript

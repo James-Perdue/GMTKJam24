@@ -17,9 +17,9 @@ func _process(delta: float) -> void:
 
 func show_game_over(victory: bool):
 	get_tree().paused = true
-	var vp_size = get_viewport().size
-	print(vp_size)
-	self.size = vp_size
+	#var vp_size = get_viewport().size
+	#print(vp_size)
+	#self.size = vp_size
 	self.show()
 
 func _show_leaderboard():

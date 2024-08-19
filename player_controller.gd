@@ -14,6 +14,7 @@ func _ready() -> void:
 	hud.set_food(colony.food)
 	hud.update_count(len(colony.cells))
 	hud.upgraded.connect(colony._updateStats)
+	hud.mutated.connect(colony._update_mutations)
 
 
 func _process(_delta: float) -> void:

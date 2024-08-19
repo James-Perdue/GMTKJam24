@@ -4,11 +4,11 @@ extends TextureRect
 @export var stat_dict: Dictionary
 
 
-var upgrade_list = self._load_text_options("res://data/upgrades.json")
+var upgrade_list = self._load_text_options("res://data/mutations.json")
 var food = 0
 
 signal food_status(food_val)
-signal upgraded(new_food, upgrade_dict)
+signal mutated(remaining_food, mut_dict)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,11 +43,7 @@ func _load_text_options(filename: StringName) -> Dictionary:
 	else:
 		print("JSON Parse Error: ", json.get_error_message(), " in ", content, " at line ", json.get_error_line())
 	return upgr_opts
-	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func _subtract_food(amount):
 	print("Reached %d " % amount)
@@ -64,5 +60,5 @@ func to_dict():
 	
 func _exit_button():
 	self.hide()
-	upgraded.emit(self.food, self.to_dict())
+	self.mutated.emit(self.food, self.to_dict())
 	get_tree().paused = false
