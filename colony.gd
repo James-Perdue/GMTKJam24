@@ -16,7 +16,6 @@ var d_speed = 400
 var d_damage_multiplier = 1.0
 var d_cell_lifetime = 20
 var d_cell_durability = 1
-var d_cell_durability = 1
 var d_food_efficiency = 1.0
 var d_split_cost = 5
 
