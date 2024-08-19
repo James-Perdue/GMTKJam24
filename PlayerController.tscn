@@ -29,3 +29,4 @@ layout_mode = 2
 
 [connection signal="colonyDied" from="Colony" to="." method="_on_colony_colony_died"]
 [connection signal="colonyUpdated" from="Colony" to="." method="_on_colony_colony_updated"]
+[connection signal="foodChanged" from="Colony" to="." method="_on_colony_food_changed"]
