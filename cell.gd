@@ -24,7 +24,10 @@ func _ready() -> void:
 		killCell()
 
 func killCell():
+	# Be careful redefining _exit_tree as it can cause weird behavior when closing the game
+	get_parent().cellDied.emit(self)
 	queue_free()
+
 	
 func move_to_target():
 	var direction = (target_position - position).normalized()
@@ -37,6 +40,3 @@ func _process(delta: float) -> void:
 		lifeRemaining -= delta
 		cellAnim.modulate = Color(.5,.5,.5).lerp(Color(color), lifeRemaining / lifeTime)
 	move_to_target()
-	
-func _exit_tree() -> void:
-	get_parent().cellDied.emit(self)
