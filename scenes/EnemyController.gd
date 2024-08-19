@@ -8,7 +8,8 @@ var colonySettings = {
 		cellDurability = 5,
 		speed = 200,
 		damageMultiplier = 2,
-		startPosition = Vector2(20, 256)
+		startPosition = Vector2(20, 256),
+		numCells = 1
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +19,7 @@ func _ready() -> void:
 	colony = Colony.instantiate()
 	colony.colonyColor = colonySettings.colonyColor
 	colony.position = colonySettings.startPosition
+	colony.initialCells = colonySettings.numCells
 	colony.colonyDied.connect(_on_colony_die)
 	# Colony Specific Stats
 	# Is there a need for this?
