@@ -166,14 +166,14 @@ func _on_cell_died(cell: Area2D) -> void:
 func _updateStats(new_food_total: int, new_stats: Dictionary):
 	if(food != new_food_total):
 		self.food = new_food_total
-		foodChanged.emit()
+		foodChanged.emit(self.food)
 	# Scale stats based on number of owned upgrades
 	print(new_stats)
-	var new_speed = d_speed + new_stats["Speed"] * 200
+	var new_speed = d_speed + new_stats["Additional Cilia"] * 200
 	var new_dam = d_damage_multiplier + new_stats["Surface Antigens"] * 0.2
-	var new_lifetime = d_cell_lifetime + new_stats["Lifespan"] * 5
-	var new_durability = d_cell_durability + new_stats["Toughness"] * 1
-	var new_fe = d_food_efficiency + new_stats["Food Efficiency"] * 1.5
+	var new_lifetime = d_cell_lifetime + new_stats["Longer Telomeres"] * 5
+	var new_durability = d_cell_durability + new_stats["Cell Wall"] * 1
+	var new_fe = d_food_efficiency + new_stats["Efficient Metabolism"] * 1.5
 	var new_sc = max(1, d_split_cost - new_stats["Mitosis Cost"])  # Don't want negative split cost
 	self.set_stats(new_speed, new_dam	, new_lifetime, new_durability, new_fe, new_sc)
 
@@ -181,7 +181,7 @@ func _update_mutations(new_food_total: int, new_muts: Dictionary):
 	print(new_muts)
 	if(food != new_food_total):
 		self.food = new_food_total
-		foodChanged.emit()
+		foodChanged.emit(self.food)
 	self.can_flagellate = new_muts["Flagellate"]
 	if(new_muts.has("Cancer")):
 		if(new_muts["Cancer"]):
