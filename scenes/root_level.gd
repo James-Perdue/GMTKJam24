@@ -190,6 +190,8 @@ func _start_new_game():
 	# https://forum.godotengine.org/t/how-do-i-make-my-hud-track-with-a-moving-camera2d/12025
 	initializeEnemies()
 	
-func changeLevel(levelNumber: int):
+func change_level(levelNumber: int):
 	var newLevel = tileMaps["level" + str(levelNumber)].instantiate()
-	get_tree().root.get_child(0).replace_by(newLevel)
+	print("newLevel", newLevel)
+	self.get_child(0).replace_by(newLevel)
+	self.get_node('PlayerController').get_node('Colony').global_position = Vector2(617, 336)
