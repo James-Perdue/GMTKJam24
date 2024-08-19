@@ -15,6 +15,7 @@ func _ready() -> void:
 	self._update_name()
 	self._update_cost()
 	self._update_owned()
+	self._update_tooltip()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -41,6 +42,9 @@ func _update_cost():
 
 func _update_owned():
 	$owned_disp.text = black("OWNED: %d" % self.purchased)
+
+func _update_tooltip():
+	$purchase_button.tooltip_text = self.stat_desc
 
 func _purchase():
 	print("Purchased Upgrade")

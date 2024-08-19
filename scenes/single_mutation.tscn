@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ba87lu41ee5nj"]
+[gd_scene load_steps=6 format=3 uid="uid://rykyjd5obp8j"]
 
 [ext_resource type="Texture2D" uid="uid://bk32x8xia1w3n" path="res://art/upgrade_bkgnd.png" id="1_8ogws"]
 [ext_resource type="Script" path="res://scenes/single_mutation.gd" id="2_fvnie"]

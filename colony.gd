@@ -109,6 +109,8 @@ func get_random_point_in_circle(radius):
 	return Vector2(x, y)
 
 func flagellate():
+	if not self.can_flagellate:
+		return
 	if(flagellating):
 		return
 	flagellating = true
