@@ -23,5 +23,8 @@ width = 50.0
 default_color = Color(0.791616, 0.0107884, 6.73831e-07, 1)
 texture = ExtResource("3_cutqc")
 texture_mode = 2
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [connection signal="cellDied" from="." to="." method="_on_cell_died"]

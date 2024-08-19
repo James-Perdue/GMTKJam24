@@ -16,6 +16,7 @@ var d_speed = 400
 var d_damage_multiplier = 1.0
 var d_cell_lifetime = 20
 var d_cell_durability = 1
+var d_cell_durability = 1
 var d_food_efficiency = 1.0
 var d_split_cost = 5
 
@@ -27,6 +28,7 @@ var food_efficiency : float = d_food_efficiency
 var split_cost : int = d_split_cost
 
 var stunned = false
+var flagellating = false
 
 signal colonyUpdated()
 signal cellDied(cell : Area2D)
@@ -106,22 +108,44 @@ func get_random_point_in_circle(radius):
 	return Vector2(x, y)
 
 func flagellate():
+	if(flagellating):
+		return
+	flagellating = true
 	var direction = velocity.normalized()
-	var length = 500
+	var length = 300
 	$Flagella.clear_points()
 	$Flagella.add_point(Vector2(0,0))
 	var lastPoint = Vector2(0,0)
 	for i in range(5):
 		await get_tree().create_timer(.02, false).timeout
-		lastPoint += direction * length * .2
+		lastPoint += direction * length * .2 + Vector2(randf_range(-10,10), randf_range(-10,10))
 		$Flagella.add_point(lastPoint)
 		
-		
+	var query = PhysicsRayQueryParameters2D.create(Vector2(global_position), Vector2(global_position + direction * length))
+	var result = get_world_2d().direct_space_state.intersect_ray(query)
+	if result:
+		if(result.collider.has_meta("type")):
+			var type = result.collider.get_meta("type")
+			
+			if type == "colony":
+				damageColony(result.collider, 5)
 	await get_tree().create_timer(.2, false).timeout
 	$Flagella.clear_points()
-
+	flagellating = false
+	
+func damageColony(colony, totalDamage):
+	var cellsKilled = clamp(floor(totalDamage / colony.cellDurability), 0, len(colony.cells))
+	var potentialCells = range(0, cellsKilled)
+	for i in potentialCells:
+		if(len(colony.cells) <= i):
+			break
+		colony.cells[i].killCell()
+	
 func _on_cell_died(cell: Area2D) -> void:
-	AudioManager.play_sound("Squelch", 1)
+	if(randf() < .001):
+		AudioManager.play_sound("manly_scream_1", 1)
+	else:
+		AudioManager.play_sound("Squelch", 1)
 	cells.erase(cell)
 	updateColony()
 	if(len(cells) <= 0):

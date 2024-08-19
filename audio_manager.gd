@@ -28,7 +28,8 @@ func play_sound(sound_name: String, volume_db: float = 0.0):
 		add_child(player)
 		audio_players[sound_name] = player
 		player.play()
-
+		
+		
 func play_music(music_name: String, volume_db: float = 0.0):
 	music_player.stream = load("res://assets/Sounds/" + music_name + ".ogg")
 	music_player.volume_db = volume_db

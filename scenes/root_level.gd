@@ -9,21 +9,24 @@ var enemies = [
 		cellDurability = 5,
 		speed = 200,
 		damageMultiplier = 2,
-		startPosition = Vector2(150, 200)
+		startPosition = Vector2(150, 200),
+		numCells = 1
 	},
 	{
 		colonyColor = 'green',
 		cellDurability = 3,
 		speed = 300,
 		damageMultiplier = 1,
-		startPosition = Vector2(2000, 200)
+		startPosition = Vector2(2000, 200),
+		numCells = 5
 	},
 	{
 		colonyColor = 'black',
 		cellDurability = 5,
 		speed = 100,
 		damageMultiplier = 10,
-		startPosition = Vector2(4000, 200)
+		startPosition = Vector2(4000, 200),
+		numCells = 2
 	}
 ]
 
@@ -49,14 +52,19 @@ func initializeEnemies() -> void:
 func _on_food_timer_timeout() -> void:
 	var screenSize = get_viewport_rect().size
 	if(camera):
-		var x = randf_range(camera.global_position.x - screenSize.x * .3, camera.global_position.x + screenSize.x * .3)
-		var y = randf_range(camera.global_position.y - screenSize.y * .3, camera.global_position.y + screenSize.y * .3)
-		
-		var foodInstance = Food.instantiate()
-		add_child(foodInstance)
-		foodInstance.position.x = x
-		foodInstance.position.y = y
-		foodInstance.add_to_group("foods")
+		while(true):
+			var x = randf_range(camera.global_position.x - screenSize.x * .3, camera.global_position.x + screenSize.x * .3)
+			var y = randf_range(camera.global_position.y - screenSize.y * .3, camera.global_position.y + screenSize.y * .3)
+			var checkPoint = PhysicsPointQueryParameters2D.new()
+			checkPoint.position = Vector2(x,y)
+			if(get_world_2d().direct_space_state.intersect_point(checkPoint).size() > 0):
+				continue
+			var foodInstance = Food.instantiate()
+			add_child(foodInstance)
+			foodInstance.position.x = x
+			foodInstance.position.y = y
+			foodInstance.add_to_group("foods")
+			break
 
 func _on_player_controller_game_over(won: bool) -> void:
 	# Stop Food Spawning

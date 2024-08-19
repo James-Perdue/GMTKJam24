@@ -27,7 +27,6 @@ func killCell():
 	# Be careful redefining _exit_tree as it can cause weird behavior when closing the game
 	get_parent().cellDied.emit(self)
 	queue_free()
-
 	
 func move_to_target():
 	if(get_parent().colonyRadius == 0):
