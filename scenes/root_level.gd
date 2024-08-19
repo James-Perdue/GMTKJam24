@@ -151,6 +151,38 @@ var enemiesLvl1Area1 = [
 		damageMultiplier = 2,
 		startPosition = Vector2(-36, -3322),
 		numCells = 150
+	},
+	{
+		colonyColor = 'cyan',
+		cellDurability = 10,
+		speed = 700,
+		damageMultiplier = 15,
+		startPosition = Vector2(2934, -3333),
+		numCells = 30
+	},
+	{
+		colonyColor = 'cyan',
+		cellDurability = 10,
+		speed = 600,
+		damageMultiplier = 15,
+		startPosition = Vector2(3766, -3333),
+		numCells = 40
+	},
+	{
+		colonyColor = 'pink',
+		cellDurability = 50,
+		speed = 75,
+		damageMultiplier = 50,
+		startPosition = Vector2(5686, -3253),
+		numCells = 1
+	},
+	{
+		colonyColor = 'black',
+		cellDurability = 5,
+		speed = 100,
+		damageMultiplier = 10,
+		startPosition = Vector2(6931, -4214),
+		numCells = 100
 	}
 	
 ]
@@ -159,9 +191,41 @@ var enemiesLvl2Area1 = [
 		colonyColor = 'brown',
 		cellDurability = 10,
 		speed = 200,
-		damageMultiplier = 4,
-		startPosition = Vector2(2000, 200),
-		numCells = 10
+		damageMultiplier = 15,
+		startPosition = Vector2(1011, 9),
+		numCells = 30
+	},
+	{
+		colonyColor = 'pink',
+		cellDurability = 50,
+		speed = 75,
+		damageMultiplier = 50,
+		startPosition = Vector2(1281, 752),
+		numCells = 15
+	},
+	{
+		colonyColor = 'cyan',
+		cellDurability = 10,
+		speed = 700,
+		damageMultiplier = 15,
+		startPosition = Vector2(2324, 1112),
+		numCells = 75
+	},
+	{
+		colonyColor = 'blue',
+		cellDurability = 5,
+		speed = 200,
+		damageMultiplier = 2,
+		startPosition = Vector2(3500, 650),
+		numCells = 150
+	},
+	{
+		colonyColor = 'black',
+		cellDurability = 5,
+		speed = 100,
+		damageMultiplier = 10,
+		startPosition = Vector2(4538, -1542),
+		numCells = 250
 	}]
 var player
 var camera
@@ -236,7 +300,7 @@ func change_level(levelNumber: int):
 	var newLevel = tileMaps["level" + str(levelNumber)].instantiate()
 	print("newLevel", newLevel)
 	cleanUp()
-	self.get_child(0).replace_by(newLevel)
+	self.get_child(0).call_deferred("replace_by", newLevel)
 	self.get_node('PlayerController').get_node('Colony').global_position = Vector2(617, 336)
 	if(newLevel.name == "Lv2TileMap"):
 		for enemy in enemiesLvl2Area1:
