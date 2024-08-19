@@ -22,7 +22,9 @@ func _process(_delta: float) -> void:
 	
 	if(Input.is_action_just_pressed("action")):
 		colony.splitCell()
-	
+	if(Input.is_action_just_pressed("attack")):
+		colony.flagellate()
+		
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")

@@ -10,7 +10,6 @@
 script = ExtResource("1_1ob37")
 
 [node name="Colony" parent="." instance=ExtResource("2_3b7ar")]
-initialCells = null
 
 [node name="Camera2D" type="Camera2D" parent="Colony"]
 

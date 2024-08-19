@@ -22,7 +22,7 @@ var enemies = [
 		colonyColor = 'black',
 		cellDurability = 5,
 		speed = 100,
-		damageMultiplier = 2,
+		damageMultiplier = 10,
 		startPosition = Vector2(4000, 200)
 	}
 ]

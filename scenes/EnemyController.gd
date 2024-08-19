@@ -30,7 +30,7 @@ func _on_colony_die():
 func _on_player_controller_game_over(won: bool) -> void:
 	active = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(!active):
 		return
 	if player and player.get_node('Colony'):
