@@ -34,9 +34,9 @@ var enemies = [
 	},
 	{
 		colonyColor = 'blue',
-		cellDurability = 3,
-		speed = 300,
-		damageMultiplier = 1,
+		cellDurability = 5,
+		speed = 200,
+		damageMultiplier = 2,
 		startPosition = Vector2(4343, -1269),
 		numCells = 30
 	},
@@ -55,6 +55,70 @@ var enemies = [
 		damageMultiplier = 1,
 		startPosition = Vector2(2813, -1273),
 		numCells = 25
+	},
+	{
+		colonyColor = 'black',
+		cellDurability = 5,
+		speed = 100,
+		damageMultiplier = 10,
+		startPosition = Vector2(2153, -1273),
+		numCells = 15
+	},
+	{
+		colonyColor = 'green',
+		cellDurability = 3,
+		speed = 300,
+		damageMultiplier = 1,
+		startPosition = Vector2(1817, -1264),
+		numCells = 35
+	},
+	{
+		colonyColor = 'green',
+		cellDurability = 3,
+		speed = 300,
+		damageMultiplier = 1,
+		startPosition = Vector2(1309, -1260),
+		numCells = 10
+	},
+	{
+		colonyColor = 'blue',
+		cellDurability = 5,
+		speed = 200,
+		damageMultiplier = 2,
+		startPosition = Vector2(698, -1398),
+		numCells = 30
+	},
+	{
+		colonyColor = 'blue',
+		cellDurability = 5,
+		speed = 200,
+		damageMultiplier = 2,
+		startPosition = Vector2(34, -1290),
+		numCells = 30
+	},
+	{
+		colonyColor = 'blue',
+		cellDurability = 5,
+		speed = 200,
+		damageMultiplier = 2,
+		startPosition = Vector2(-414, -1326),
+		numCells = 5
+	},
+	{
+		colonyColor = 'black',
+		cellDurability = 5,
+		speed = 100,
+		damageMultiplier = 10,
+		startPosition = Vector2(-1726, -1349),
+		numCells = 45
+	},
+	{
+		colonyColor = 'cyan',
+		cellDurability = 10,
+		speed = 500,
+		damageMultiplier = 15,
+		startPosition = Vector2(-3355, -1292),
+		numCells = 2
 	}
 	
 ]

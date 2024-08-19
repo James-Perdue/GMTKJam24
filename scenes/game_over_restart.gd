@@ -1,5 +1,6 @@
 extends TextureRect
 
+
 signal new_game()
 
 # Called when the node enters the scene tree for the first time.
@@ -34,5 +35,10 @@ func _start_new_game():
 	self.new_game.emit()
 	
 func _quit_game():
+	var splashScreen = load("res://scenes/splash_screen.tscn")
 	print("Quitting Game")
-	get_tree().quit()
+	if(splashScreen):
+		get_tree().paused = false
+		get_tree().change_scene_to_packed(splashScreen)
+		AudioManager.pause_music(true)
+	#get_tree().quit()

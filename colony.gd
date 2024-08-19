@@ -34,6 +34,7 @@ var flagellating = false
 var can_flagellate := false
 var hasCancer = false
 var cancerTimer: Timer
+var originalCellCount : int
 
 signal colonyUpdated()
 signal cellDied(cell : Area2D)
@@ -68,9 +69,8 @@ func _ready() -> void:
 	
 	for i in range(initialCells):
 		self.spawnCell(cellLifeTime)
-	
 	cancerTimer = Timer.new()
-	cancerTimer.set_wait_time(.2)
+	cancerTimer.set_wait_time(.1)
 	cancerTimer.set_one_shot(false)
 	cancerTimer.connect("timeout", Callable(self, "_on_Timer_timeout"))
 	add_child(cancerTimer)

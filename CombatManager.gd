@@ -3,6 +3,7 @@ var fighting = false
 
 func startFight(colonyA, colonyB):
 	if not fighting:
+		AudioManager.play_sound("Fight", .5)
 		fighting = true
 		processFight(colonyA, colonyB)
 		await get_tree().create_timer(.5, false).timeout
