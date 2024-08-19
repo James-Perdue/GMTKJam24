@@ -38,7 +38,7 @@ func _update_cost():
 	$cost_disp.text = black("COST: %d" % self.base_cost)
 
 func _update_owned():
-	$owned_disp.text = black("OWNED: %d" % self.purchased)
+	$owned_disp.text = black("OWNED: %d" % int(self.purchased))
 
 func _update_tooltip():
 	$purchase_button.tooltip_text = self.stat_desc
@@ -47,7 +47,7 @@ func _purchase():
 	print("Purchased Upgrade")
 	self.purchased = true
 	purchase.emit(self.base_cost)
-	print("Times Purchased %d" % self.purchased)
+	print("Times Purchased %d" % int(self.purchased))
 	self._update_cost()
 	self._update_owned()
 

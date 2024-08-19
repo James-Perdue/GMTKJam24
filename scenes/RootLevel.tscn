@@ -26,6 +26,6 @@ position = Vector2(246, 244)
 [node name="game_over" parent="game_over_canvas" instance=ExtResource("5_nw7ai")]
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(2871, -1237)
+position = Vector2(-2335, -1269)
 
 [connection signal="timeout" from="FoodTimer" to="." method="_on_food_timer_timeout"]
