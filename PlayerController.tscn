@@ -10,20 +10,22 @@
 script = ExtResource("1_1ob37")
 
 [node name="Colony" parent="." instance=ExtResource("2_3b7ar")]
+initialCells = null
 
 [node name="Camera2D" type="Camera2D" parent="Colony"]
 
-[node name="hud_cont" type="PanelContainer" parent="Colony/Camera2D"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Colony"]
+
+[node name="hud_cont" type="PanelContainer" parent="Colony/CanvasLayer"]
 z_index = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_right = 1152.0
-offset_bottom = 648.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-pivot_offset = Vector2(576, 328)
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_xreya")
 
-[node name="hud" parent="Colony/Camera2D/hud_cont" instance=ExtResource("3_8uawu")]
+[node name="hud" parent="Colony/CanvasLayer/hud_cont" instance=ExtResource("3_8uawu")]
 layout_mode = 2
 
 [connection signal="colonyDied" from="Colony" to="." method="_on_colony_colony_died"]
