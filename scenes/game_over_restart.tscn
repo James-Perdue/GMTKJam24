@@ -62,7 +62,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
-text = "[center][font_size=94]INFECTION[/font_size][/center]"
+text = "[center][font_size=94]ERADICATED[/font_size][/center]"
 scroll_active = false
 
 [node name="resource_display" type="TextureRect" parent="."]

@@ -3,7 +3,11 @@ extends Control
 
 var upgrade_scene = preload("res://scenes/upgrade.tscn")
 var upgrade_loaded
-signal upgraded(new_food, upgrade_dict)
+var mutation_scene = preload("res://scenes/mutations.tscn")
+var mutations_loaded
+signal upgraded(new_food, up_dict)
+signal mutated(new_food, mut_dict)
+
 
 # Volume values and textures
 var is_muted := false
@@ -13,15 +17,23 @@ var tex_muted = preload("res://art/muted.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Instantiate upgrades and mutation screens
 	self.upgrade_loaded = upgrade_scene.instantiate()
 	add_child(self.upgrade_loaded)
 	self.upgrade_loaded.hide()
 	self.upgrade_loaded.process_mode = PROCESS_MODE_ALWAYS
+	
+	self.mutations_loaded = mutation_scene.instantiate()
+	add_child(self.mutations_loaded)
+	self.mutations_loaded.hide()
+	self.mutations_loaded.process_mode = PROCESS_MODE_ALWAYS
+	
 	$mutations/Button.pressed.connect(self._mutate)
 	$upgrades/Button.pressed.connect(self._upgrade)
 	$volume_control/Button.pressed.connect(self._toggle_mute)
 	$volume_control/PanelContainer/HSlider.value_changed.connect(self._change_volume)
-	self.upgrade_loaded.exit_scene.connect(self._close_screen)
+	self.upgrade_loaded.upgraded.connect(self._upgrade_finished)
+	self.mutations_loaded.mutated.connect(self._mutation_finished)
 	self.is_muted = AudioManager.is_muted  # sync muted status on creation
 	self._update_mute_display()
 	self._update_vol_display()
@@ -33,23 +45,32 @@ func _process(delta: float) -> void:
 
 func _mutate():
 	print("Mutation Screen")
+	get_tree().paused = true
+	self.mutations_loaded.show()
+	self.mutations_loaded._show_food()
 
 func _upgrade():
 	print("Upgrade Screen")
 	get_tree().paused = true
 	self.upgrade_loaded.show()
 	self.upgrade_loaded._show_food()
-	
-func _close_screen(new_food):
-	print("Exiting Screen")
-	self.upgrade_loaded.hide()
-	get_tree().paused = false
+
+# Update food and pass the upgrade to the controller
+func _upgrade_finished(new_food, up_dict):
 	self.set_food(new_food)
-	self.upgraded.emit(new_food, self.upgrade_loaded.to_dict())  # Signal going back up to colony
+	self.upgraded.emit(new_food, up_dict)  # Signal going back up to colony
+
+# Update food and pass the mutation to the controller
+func _mutation_finished(new_food, mut_dict):
+	print("Finished Mutation")
+	self.set_food(new_food)
+	self.mutated.emit(new_food, mut_dict)
 
 func set_food(new_food: int):
 	self.upgrade_loaded.food = new_food
 	self.upgrade_loaded.food_status.emit(new_food)  # Signal syncing to upgrade screen
+	self.mutations_loaded.food = new_food
+	self.mutations_loaded.food_status.emit(new_food)  # Signal syncing to upgrade screen
 	$food_count/RichTextLabel.text = "[color=black]FOOD: %d[/color]" % self.upgrade_loaded.food
 
 func update_count(new_count: int):
@@ -60,7 +81,6 @@ func _update_mute_display():
 		$volume_control/Button.texture_normal = tex_muted
 	else:
 		$volume_control/Button.texture_normal = tex_unmuted
-
 
 func _update_vol_display():
 	# Update for starting after a new game

@@ -1,20 +1,15 @@
 {
-	"Speed": {
-		"Description": "Additional Flagella improve the cell's maximum speed",
+	"Additional Cilia": {
+		"Description": "Additional Cilia improve the cell's maximum speed",
 		"Base Cost": 10,
 		"Scalar": 1.1
 	},
-	"Toughness": {
+	"Cell Wall": {
 		"Description": "A thicker cell wall means this cell can take more damage",
 		"Base Cost": 10,
 		"Scalar": 1.1
 	},
-	"Agility": {
-		"Description": "Cillia on the sides of the cells increase their ability to turn and accelerate",
-		"Base Cost": 10,
-		"Scalar": 1.1
-	},
-	"Lifespan": {
+	"Longer Telomeres": {
 		"Description": "Adapt this cell to a longer lifespan",
 		"Base Cost": 5,
 		"Scalar": 1.4
@@ -29,12 +24,12 @@
 		"Base Cost": 10,
 		"Scalar": 1.2
 	},
-	"Antibodies": {
-		"Description": "Stronger antibodies deal damage at a distance",
+	"Flagella Strength": {
+		"Description": "Stronger flagella deal additional damage at a distance",
 		"Base Cost": 100,
 		"Scalar": 1.3
 	},
-	"Food Efficiency": {
+	"Efficient Metabolism": {
 		"Description": "Aerobic Respiration means every sugar molecule goes further",
 		"Base Cost": 100,
 		"Scalar": 1.5

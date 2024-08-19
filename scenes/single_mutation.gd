@@ -2,9 +2,8 @@ extends TextureRect
 
 var stat_name: StringName
 var stat_desc: StringName
-var purchased: int
+var purchased: bool
 var base_cost: int
-var scalar: float
 
 signal purchase(cost: int)
 
@@ -21,17 +20,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func create(statname="TEST", cost=100, desc="TODO", scalar=1.0):
+func create(statname="TEST", cost=100, desc="TODO"):
 	self.stat_name = statname
 	self.stat_desc = desc
 	self.base_cost = cost
-	self.purchased = 0
-	self.scalar = scalar
+	self.purchased = false
 	return self
 
 func create_from_dict(statname, stat_dict):
-	self.create(statname, stat_dict["Base Cost"], stat_dict["Description"], stat_dict["Scalar"])
-	self.purchased = 0
+	self.create(statname, stat_dict["Cost"], stat_dict["Description"])
 	return self
 
 func _update_name():  # FIXME: This doesn't center
@@ -48,9 +45,8 @@ func _update_tooltip():
 
 func _purchase():
 	print("Purchased Upgrade")
+	self.purchased = true
 	purchase.emit(self.base_cost)
-	self.purchased += 1
-	self.base_cost *= self.scalar
 	print("Times Purchased %d" % self.purchased)
 	self._update_cost()
 	self._update_owned()
@@ -62,7 +58,7 @@ func center(txt: StringName) -> StringName:
 	return "[center]%s[/center]" % txt
 
 func check_cost(food_val: int):
-	if self.base_cost > food_val:
+	if self.base_cost > food_val or self.purchased:
 		$purchase_button.set_disabled(true)
 	elif $purchase_button.is_disabled() and self.base_cost <= food_val:
 		$purchase_button.set_disabled(false)

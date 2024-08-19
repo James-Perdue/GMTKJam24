@@ -18,6 +18,7 @@ var d_cell_lifetime = 20
 var d_cell_durability = 1
 var d_food_efficiency = 1.0
 var d_split_cost = 5
+var d_flagellate_damage := 5
 
 var speed : int = d_speed
 var damageMultiplier : float = d_damage_multiplier
@@ -25,9 +26,14 @@ var cellLifeTime : int = d_cell_lifetime
 var cellDurability : int = d_cell_durability
 var food_efficiency : float = d_food_efficiency
 var split_cost : int = d_split_cost
+var flagellate_damage := d_flagellate_damage
 
 var stunned = false
 var flagellating = false
+# Unlockable Mutations
+var can_flagellate := false
+var hasCancer = false
+var cancerTimer: Timer
 
 signal colonyUpdated()
 signal cellDied(cell : Area2D)
@@ -62,11 +68,15 @@ func _ready() -> void:
 	
 	for i in range(initialCells):
 		self.spawnCell(cellLifeTime)
-	#print(get_tree().current_scene)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(_delta: float) -> void:
-	#pass
+	cancerTimer = Timer.new()
+	cancerTimer.set_wait_time(.2)
+	cancerTimer.set_one_shot(false)
+	cancerTimer.connect("timeout", Callable(self, "_on_Timer_timeout"))
+	add_child(cancerTimer)
+	
+func _on_Timer_timeout():
+	splitCell()
 
 func move(direction: Vector2):
 	if(!stunned):
@@ -107,6 +117,8 @@ func get_random_point_in_circle(radius):
 	return Vector2(x, y)
 
 func flagellate():
+	if not self.can_flagellate:
+		return
 	if(flagellating):
 		return
 	flagellating = true
@@ -127,7 +139,7 @@ func flagellate():
 			var type = result.collider.get_meta("type")
 			
 			if type == "colony":
-				damageColony(result.collider, 5)
+				damageColony(result.collider, flagellate_damage)
 	await get_tree().create_timer(.2, false).timeout
 	$Flagella.clear_points()
 	flagellating = false
@@ -154,16 +166,27 @@ func _on_cell_died(cell: Area2D) -> void:
 func _updateStats(new_food_total: int, new_stats: Dictionary):
 	if(food != new_food_total):
 		self.food = new_food_total
-		foodChanged.emit()
+		foodChanged.emit(self.food)
 	# Scale stats based on number of owned upgrades
 	print(new_stats)
-	var new_speed = d_speed + new_stats["Speed"] * 200
+	var new_speed = d_speed + new_stats["Additional Cilia"] * 200
 	var new_dam = d_damage_multiplier + new_stats["Surface Antigens"] * 0.2
-	var new_lifetime = d_cell_lifetime + new_stats["Lifespan"] * 5
-	var new_durability = d_cell_durability + new_stats["Toughness"] * 1
-	var new_fe = d_food_efficiency + new_stats["Food Efficiency"] * 1.5
+	var new_lifetime = d_cell_lifetime + new_stats["Longer Telomeres"] * 5
+	var new_durability = d_cell_durability + new_stats["Cell Wall"] * 1
+	var new_fe = d_food_efficiency + new_stats["Efficient Metabolism"] * 1.5
 	var new_sc = max(1, d_split_cost - new_stats["Mitosis Cost"])  # Don't want negative split cost
 	self.set_stats(new_speed, new_dam	, new_lifetime, new_durability, new_fe, new_sc)
+
+func _update_mutations(new_food_total: int, new_muts: Dictionary):
+	print(new_muts)
+	if(food != new_food_total):
+		self.food = new_food_total
+		foodChanged.emit(self.food)
+	self.can_flagellate = new_muts["Flagellate"]
+	if(new_muts.has("Cancer")):
+		if(new_muts["Cancer"]):
+			activateCancer()
+
 
 # Nice setter for doing enemy stat blocks and stuff. Uses default values if not explicit
 # Imagine my surprise when calling parameters by names isn't a thing in GDScript
@@ -176,3 +199,7 @@ func set_stats(n_speed=d_speed, n_damage_multiplier=d_damage_multiplier, n_cell_
 	self.cellDurability = n_cell_durability
 	self.food_efficiency = n_fe
 	self.split_cost = n_sc
+	
+func activateCancer():
+	hasCancer = true
+	cancerTimer.start()

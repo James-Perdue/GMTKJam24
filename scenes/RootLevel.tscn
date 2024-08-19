@@ -21,6 +21,8 @@ autostart = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(246, 244)
 
-[node name="game_over" parent="." instance=ExtResource("5_nw7ai")]
+[node name="game_over_canvas" type="CanvasLayer" parent="."]
+
+[node name="game_over" parent="game_over_canvas" instance=ExtResource("5_nw7ai")]
 
 [connection signal="timeout" from="FoodTimer" to="." method="_on_food_timer_timeout"]

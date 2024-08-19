@@ -5,7 +5,10 @@ signal gameOver(won : bool)
 var hud: HeadsUp
 signal mute(is_muted: bool)
 signal vol_change(new_volume: float)
+var spawning = false
+var heldSplitTimer: Timer
 
+var keyHeld = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,14 +17,29 @@ func _ready() -> void:
 	hud.set_food(colony.food)
 	hud.update_count(len(colony.cells))
 	hud.upgraded.connect(colony._updateStats)
+	heldSplitTimer = Timer.new()
+	heldSplitTimer.set_wait_time(.5)
+	heldSplitTimer.set_one_shot(false)
+	heldSplitTimer.connect("timeout", Callable(self, "_on_Timer_timeout"))
+	add_child(heldSplitTimer)
 
-
+	hud.mutated.connect(colony._update_mutations)
+	
+func _on_Timer_timeout():
+	if keyHeld:
+		colony.splitCell()
+	
 func _process(_delta: float) -> void:
 	var viewport = get_viewport()
 	viewport.canvas_transform.origin = -$Colony/Camera2D.global_position
-	
-	if(Input.is_action_just_pressed("action")):
+	if(Input.is_action_pressed("action") and not keyHeld):
+		keyHeld = true
 		colony.splitCell()
+		heldSplitTimer.start()
+	if(not Input.is_action_pressed("action") and keyHeld):
+		keyHeld = false
+		heldSplitTimer.stop()
+	
 	if(Input.is_action_just_pressed("attack")):
 		colony.flagellate()
 		
