@@ -48,3 +48,6 @@ func mute(to_mute: bool):
 
 func set_master_volume(volume_db: float):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), volume_db)
+
+func get_master_volume() -> float:
+	return AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))

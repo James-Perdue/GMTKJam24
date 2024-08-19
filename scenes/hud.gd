@@ -6,7 +6,7 @@ var upgrade_loaded
 signal upgraded(new_food, upgrade_dict)
 
 # Volume values and textures
-var is_muted = false
+var is_muted := false
 var tex_unmuted = preload("res://art/volume.png")
 var tex_muted = preload("res://art/muted.png")
 
@@ -22,6 +22,9 @@ func _ready() -> void:
 	$volume_control/Button.pressed.connect(self._toggle_mute)
 	$volume_control/PanelContainer/HSlider.value_changed.connect(self._change_volume)
 	self.upgrade_loaded.exit_scene.connect(self._close_screen)
+	self.is_muted = AudioManager.is_muted  # sync muted status on creation
+	self._update_mute_display()
+	self._update_vol_display()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,14 +55,23 @@ func set_food(new_food: int):
 func update_count(new_count: int):
 	$cell_count/RichTextLabel.text = "[color=black]CELLS: %d[/color]" % new_count
 
-func _toggle_mute():
-	print("Toggled Function")
-	# Toggle muting
-	self.is_muted = not self.is_muted
+func _update_mute_display():
 	if self.is_muted:
 		$volume_control/Button.texture_normal = tex_muted
 	else:
 		$volume_control/Button.texture_normal = tex_unmuted
+
+
+func _update_vol_display():
+	# Update for starting after a new game
+	print("Syncing volume setting %s" % db_to_linear(AudioManager.get_master_volume()))
+	$volume_control/PanelContainer/HSlider.set_value_no_signal(db_to_linear(AudioManager.get_master_volume()))
+
+func _toggle_mute():
+	print("Toggled Function")
+	# Toggle muting
+	self.is_muted = not self.is_muted
+	self._update_mute_display()
 	AudioManager.mute(self.is_muted)
 
 func _change_volume(new_vol_lin: float):
