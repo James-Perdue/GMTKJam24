@@ -14,8 +14,6 @@ func _ready() -> void:
 	$Colony/Camera2D/hud_cont/hud.set_food(colony.food)
 	$Colony/Camera2D/hud_cont/hud.update_count(len(colony.cells))
 	$Colony/Camera2D/hud_cont/hud.upgraded.connect(colony._updateStats)
-	hud.mute.connect(self._mute)
-	hud.vol_change.connect(self._change_volume)
 	self._set_hud_location()
 
 func _set_hud_location():
@@ -55,12 +53,3 @@ func _on_colony_colony_updated() -> void:
 
 func _on_colony_food_changed(newFood: int) -> void:
 	$Colony/Camera2D/hud_cont/hud.set_food(newFood)
-
-
-# Pass-through mute signal to whatever node controls PlayerController
-func _mute(is_muted: bool):
-	self.mute.emit(is_muted)
-
-
-func _change_volume(new_vol: float):
-	self.vol_change.emit(new_vol)

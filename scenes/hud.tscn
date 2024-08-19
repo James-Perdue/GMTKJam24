@@ -89,6 +89,7 @@ grow_horizontal = 0
 
 [node name="Button" type="TextureButton" parent="upgrades"]
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_ms15g")
 texture_normal = ExtResource("1_4b7i3")
 texture_pressed = ExtResource("2_03vw8")
@@ -113,6 +114,7 @@ grow_horizontal = 0
 
 [node name="Button" type="TextureButton" parent="mutations"]
 layout_mode = 2
+focus_mode = 0
 shortcut = SubResource("Shortcut_jagvd")
 texture_normal = ExtResource("1_4b7i3")
 texture_pressed = ExtResource("2_03vw8")
@@ -162,6 +164,7 @@ layout_mode = 2
 offset_right = 50.0
 offset_bottom = 50.0
 size_flags_horizontal = 0
+focus_mode = 0
 shortcut = SubResource("Shortcut_46mqe")
 texture_normal = ExtResource("7_jhldv")
 ignore_texture_size = true

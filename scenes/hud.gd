@@ -9,12 +9,6 @@ signal upgraded(new_food, upgrade_dict)
 var is_muted = false
 var tex_unmuted = preload("res://art/volume.png")
 var tex_muted = preload("res://art/muted.png")
-signal mute(is_muted: bool)
-signal vol_change(new_vol: float)
-var bkgnd_music_options = [
-	preload("res://music/main_background_808s_0.mp3"),
-	preload("res://music/main_background_bassy_0.mp3")
-]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -59,15 +53,16 @@ func update_count(new_count: int):
 	$cell_count/RichTextLabel.text = "[color=black]CELLS: %d[/color]" % new_count
 
 func _toggle_mute():
+	print("Toggled Function")
 	# Toggle muting
 	self.is_muted = not self.is_muted
 	if self.is_muted:
 		$volume_control/Button.texture_normal = tex_muted
 	else:
 		$volume_control/Button.texture_normal = tex_unmuted
-	self.mute.emit(self.is_muted)
+	AudioManager.mute(self.is_muted)
 
 func _change_volume(new_vol_lin: float):
 	# Change Volume Value (returns value in dB)
 	var new_vol_db = linear_to_db(new_vol_lin)
-	self.vol_change.emit(new_vol_db)
+	AudioManager.set_master_volume(new_vol_db)
