@@ -10,21 +10,11 @@ signal vol_change(new_volume: float)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	colony = $Colony
-	hud = $Colony/Camera2D/hud_cont/hud
-	$Colony/Camera2D/hud_cont/hud.set_food(colony.food)
-	$Colony/Camera2D/hud_cont/hud.update_count(len(colony.cells))
-	$Colony/Camera2D/hud_cont/hud.upgraded.connect(colony._updateStats)
-	self._set_hud_location()
+	hud = $Colony/CanvasLayer/hud_cont/hud
+	hud.set_food(colony.food)
+	hud.update_count(len(colony.cells))
+	hud.upgraded.connect(colony._updateStats)
 
-func _set_hud_location():
-		# Fix scale - for some reason need to do 4x scale
-	var vp_size = get_viewport_rect()
-	var cam_position = -$Colony/Camera2D.global_position
-	$Colony/Camera2D/hud_cont.position = cam_position
-	# Get top corner position = global_position - size * 4
-	print(-$Colony/Camera2D.global_position)
-	$Colony/Camera2D/hud_cont.size = vp_size.size
-	$Colony/Camera2D/hud_cont.scale = Vector2(1, 1)
 
 func _process(_delta: float) -> void:
 	var viewport = get_viewport()
@@ -40,16 +30,20 @@ func _process(_delta: float) -> void:
 	colony.move(input_vector)
 
 
+# Return camera node - used for resetting food spawning after newgame
+func get_camera():
+	return $Colony/Camera2D
+
 func _on_colony_colony_died() -> void:
 	gameOver.emit(false)
 	queue_free()
 
 func _on_colony_colony_updated() -> void:
 	if(colony):
-		$Colony/Camera2D/hud_cont/hud.update_count(len(colony.cells))
+		$Colony/CanvasLayer/hud_cont/hud.update_count(len(colony.cells))
 	if(colony):
-		$Colony/Camera2D/hud_cont/hud.set_food(colony.food)
+		$Colony/CanvasLayer/hud_cont/hud.set_food(colony.food)
 
 
 func _on_colony_food_changed(newFood: int) -> void:
-	$Colony/Camera2D/hud_cont/hud.set_food(newFood)
+	$Colony/CanvasLayer/hud_cont/hud.set_food(newFood)
