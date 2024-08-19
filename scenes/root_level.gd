@@ -2,6 +2,10 @@ extends Node2D
 var Food = preload("res://Food.tscn")
 var EnemyController = preload("res://scenes/EnemyController.tscn")
 var PlayerController = preload("res://PlayerController.tscn")
+var tileMaps = {
+	level1 = preload("res://levels/Lv1TileMap.tscn"),
+	level2 = preload("res://levels/Lv2TileMap.tscn")
+}
 
 var enemies = [
 	{
@@ -95,3 +99,6 @@ func _start_new_game():
 	# https://forum.godotengine.org/t/how-do-i-make-my-hud-track-with-a-moving-camera2d/12025
 	initializeEnemies()
 	
+func changeLevel(levelNumber: int):
+	var newLevel = tileMaps["level" + str(levelNumber)].instantiate()
+	get_tree().root.get_child(0).replace_by(newLevel)
