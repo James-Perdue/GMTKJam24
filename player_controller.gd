@@ -18,7 +18,7 @@ func _ready() -> void:
 	hud.update_count(len(colony.cells))
 	hud.upgraded.connect(colony._updateStats)
 	heldSplitTimer = Timer.new()
-	heldSplitTimer.set_wait_time(.5)
+	heldSplitTimer.set_wait_time(.25)
 	heldSplitTimer.set_one_shot(false)
 	heldSplitTimer.connect("timeout", Callable(self, "_on_Timer_timeout"))
 	add_child(heldSplitTimer)

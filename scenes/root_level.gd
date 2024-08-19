@@ -31,7 +31,32 @@ var enemies = [
 		damageMultiplier = 10,
 		startPosition = Vector2(4000, 200),
 		numCells = 2
+	},
+	{
+		colonyColor = 'blue',
+		cellDurability = 3,
+		speed = 300,
+		damageMultiplier = 1,
+		startPosition = Vector2(4343, -1269),
+		numCells = 30
+	},
+	{
+		colonyColor = 'green',
+		cellDurability = 3,
+		speed = 300,
+		damageMultiplier = 1,
+		startPosition = Vector2(3601, -1273),
+		numCells = 20
+	},
+	{
+		colonyColor = 'green',
+		cellDurability = 3,
+		speed = 300,
+		damageMultiplier = 1,
+		startPosition = Vector2(2813, -1273),
+		numCells = 25
 	}
+	
 ]
 
 var player
