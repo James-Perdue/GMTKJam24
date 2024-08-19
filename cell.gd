@@ -30,6 +30,8 @@ func killCell():
 
 	
 func move_to_target():
+	if(get_parent().colonyRadius == 0):
+		return
 	var direction = (target_position - position).normalized()
 	position += direction * speed * get_process_delta_time()
 	if position.distance_to(target_position) < speed * get_process_delta_time():

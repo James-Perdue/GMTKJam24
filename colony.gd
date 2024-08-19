@@ -15,7 +15,7 @@ var colonyColor : String = "red"
 var d_speed = 400
 var d_damage_multiplier = 1.0
 var d_cell_lifetime = 20
-var d_cell_durability = 2
+var d_cell_durability = 1
 var d_food_efficiency = 1.0
 var d_split_cost = 5
 
@@ -25,6 +25,8 @@ var cellLifeTime : int = d_cell_lifetime
 var cellDurability : int = d_cell_durability
 var food_efficiency : float = d_food_efficiency
 var split_cost : int = d_split_cost
+
+var stunned = false
 
 signal colonyUpdated()
 signal cellDied(cell : Area2D)
@@ -36,7 +38,7 @@ func _init() -> void:
 	
 func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
-	if(collision):
+	if(collision && !stunned):
 		var collider = collision.get_collider()
 		#print(collider.name)
 		if collider.has_meta("type"):
@@ -47,7 +49,7 @@ func _physics_process(delta: float) -> void:
 				foodChanged.emit(food)
 				return
 			if type == "colony":
-				hitColony(collider)
+				CombatManager.startFight(self, collider)
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,7 +68,8 @@ func _ready() -> void:
 	#pass
 
 func move(direction: Vector2):
-	velocity = direction.normalized() * self.speed
+	if(!stunned):
+		velocity = direction.normalized() * self.speed
 
 func splitCell():
 	if(food >= self.split_cost):
@@ -86,8 +89,10 @@ func spawnCell(cell_life_time):
 	
 	
 func updateColony():
-	#print("update")
-	self.colonyRadius = max(log(len(self.cells)) / log(1.05) + 2 * self.perCellRadius, 0)
+	if(len(self.cells) > 1):
+		self.colonyRadius = max(log(len(self.cells)) / log(1.05) + 2 * self.perCellRadius, 0)
+	else:
+		self.colonyRadius = 0
 	#print(colonyRadius)
 	if self.get_node("CollisionShape2D").shape is CircleShape2D:
 		self.get_node("CollisionShape2D").shape.radius = minColonyRadius + self.colonyRadius
@@ -100,24 +105,20 @@ func get_random_point_in_circle(radius):
 	var y = r * sin(angle)
 	return Vector2(x, y)
 
-#func _on_area_2d_area_entered(area: Area2D) -> void:
-	#if area.has_meta("type"):
-		#var type = area.get_meta("type")
-		#if type == "food":
-			#food += area.get_nutrition() * self.food_efficiency
-			#area.queue_free()
-			#foodChanged.emit(food)
-			#return
-		#if type == "colony":
-			#hitColony(area.get_parent())
-
-func hitColony(colony):
-	var totalDamage = len(cells) * self.damageMultiplier
-	var cellsKilled = clamp(floor(totalDamage / colony.cellDurability), 0, len(colony.cells))
-	var potentialCells = range(0, cellsKilled)
-	for i in potentialCells:
-		colony.cells[i].killCell()
-	#print(cellsKilled)
+func flagellate():
+	var direction = velocity.normalized()
+	var length = 500
+	$Flagella.clear_points()
+	$Flagella.add_point(Vector2(0,0))
+	var lastPoint = Vector2(0,0)
+	for i in range(5):
+		await get_tree().create_timer(.02, false).timeout
+		lastPoint += direction * length * .2
+		$Flagella.add_point(lastPoint)
+		
+		
+	await get_tree().create_timer(.2, false).timeout
+	$Flagella.clear_points()
 
 func _on_cell_died(cell: Area2D) -> void:
 	AudioManager.play_sound("Squelch", 1)
