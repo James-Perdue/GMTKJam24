@@ -24,7 +24,7 @@ func _ready() -> void:
 	# Colony Specific Stats
 	# Is there a need for this?
 	colony.set_stats(colonySettings.speed, colonySettings.damageMultiplier, 0, colonySettings.cellDurability)  # imagine my surprise when GDScript doesnt support named arguments
-	add_child(colony)
+	call_deferred("add_child", colony)
 
 func _on_colony_die():
 	var food = round(colonySettings.numCells * colonySettings.cellDurability * .333)
