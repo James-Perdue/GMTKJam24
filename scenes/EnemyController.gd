@@ -27,6 +27,9 @@ func _ready() -> void:
 	add_child(colony)
 
 func _on_colony_die():
+	var food = round(colonySettings.numCells * colonySettings.cellDurability * .25)
+	player.colony.food += food
+	player.colony.foodChanged.emit(player.colony.food)
 	queue_free()
 
 func _on_player_controller_game_over(won: bool) -> void:
