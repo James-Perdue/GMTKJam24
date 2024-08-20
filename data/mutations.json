@@ -1,6 +1,10 @@
 {
 	"Flagellate": {
 		"Description": "Lash out with a large tentacle, dealing damage at a distance. Update by clicking [Left Mouse Button]",
-		"Cost": 10
+		"Cost": 50
+	},
+	"Cancer": {
+		"Description": "Cells spawn automatically and without stopping",
+		"Cost": 200
 	}
 }
