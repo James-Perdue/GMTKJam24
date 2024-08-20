@@ -210,7 +210,7 @@ var enemiesLvl2Area1 = [
 		speed = 700,
 		damageMultiplier = 15,
 		startPosition = Vector2(2324, 1112),
-		numCells = 75
+		numCells = 70
 	},
 	{
 		colonyColor = 'blue',
@@ -218,26 +218,26 @@ var enemiesLvl2Area1 = [
 		speed = 200,
 		damageMultiplier = 2,
 		startPosition = Vector2(3500, 650),
-		numCells = 150
+		numCells = 100
 	},
 	{
 		colonyColor = 'black',
 		cellDurability = 5,
 		speed = 100,
-		damageMultiplier = 10,
+		damageMultiplier = 15,
 		startPosition = Vector2(4538, -1542),
-		numCells = 250
+		numCells = 200
 	}
 ]
 
 var enemiesLvl3Area1 = [
 	{
 		colonyColor = 'white',
-		cellDurability = 15,
-		speed = 200,
+		cellDurability = 25,
+		speed = 150,
 		damageMultiplier = 15,
 		startPosition = Vector2(2133, 1172),
-		numCells = 400
+		numCells = 200
 	}
 ]
 

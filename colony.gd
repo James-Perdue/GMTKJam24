@@ -90,7 +90,10 @@ func splitCell():
 func spawnCell(cell_life_time):
 	var cellInstance = Cell.instantiate()
 	cellInstance.color = colonyColor
+	if(len(cells) > 100):
+		cellInstance.playAnim = false
 	cellInstance.initialize(0, colonyColor, cell_life_time)
+	
 	add_child(cellInstance)
 	if(len(cells) > 0):
 		cellInstance.position = self.cells[-1].position
