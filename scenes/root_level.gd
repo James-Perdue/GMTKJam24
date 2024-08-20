@@ -233,9 +233,9 @@ var enemiesLvl2Area1 = [
 var enemiesLvl3Area1 = [
 	{
 		colonyColor = 'white',
-		cellDurability = 20,
+		cellDurability = 15,
 		speed = 200,
-		damageMultiplier = 20,
+		damageMultiplier = 15,
 		startPosition = Vector2(2133, 1172),
 		numCells = 400
 	}
