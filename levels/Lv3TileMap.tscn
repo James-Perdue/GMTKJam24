@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=4 uid="uid://cw4vhsaqnwwj0"]
+[gd_scene load_steps=5 format=4 uid="uid://dba4sk50s6ryl"]
 
-[ext_resource type="TileSet" uid="uid://b2otdqq6m5f27" path="res://assets/Heart.tres" id="1_gal3d"]
+[ext_resource type="TileSet" uid="uid://d1sb3k5rmimy0" path="res://assets/Heart.tres" id="1_gal3d"]
 [ext_resource type="Script" path="res://levels/game_over_door.gd" id="2_h72fh"]
 [ext_resource type="Texture2D" uid="uid://c515brgmfn2t" path="res://art/Tentacle.png" id="3_o48cb"]
 

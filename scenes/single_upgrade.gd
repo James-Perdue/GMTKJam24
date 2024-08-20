@@ -48,9 +48,12 @@ func _update_tooltip():
 
 func _purchase():
 	print("Purchased Upgrade")
-	purchase.emit(self.base_cost)
-	self.purchased += 1
+	$purchase_button.disabled = true
+	var old_cost = self.base_cost
 	self.base_cost *= self.scalar
+	purchase.emit(old_cost)
+	self.purchased += 1
+
 	print("Times Purchased %d" % self.purchased)
 	self._update_cost()
 	self._update_owned()
