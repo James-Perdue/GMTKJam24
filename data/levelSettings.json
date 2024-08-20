@@ -1,33 +1,33 @@
 {
-    "Level1": {
-        "enemies": [
-            {
-                "colonyColor": "blue",
-                "cellDurability": 5,
-                "speed": 200,
-                "damageMultiplier": 2,
-                "startPositionX": 150,
-                "startPositionY": 200,
-                "numCells": 1
-            },
-            {
-                "colonyColor": "green",
-                "cellDurability": 3,
-                "speed": 300,
-                "damageMultiplier": 1,
-                "startPositionX": 2000,
-                "startPositionY": 200,
-                "numCells": 5
-            },
-            {
-                "colonyColor": "black",
-                "cellDurability": 5,
-                "speed": 100,
-                "damageMultiplier": 10,
-                "startPositionX": 4000,
-                "startPositionY": 200,
-                "numCells": 2
-            }
-        ]
-    }
+	"Level1": {
+		"enemies": [
+			{
+				"colonyColor": "blue",
+				"cellDurability": 5,
+				"speed": 200,
+				"damageMultiplier": 2,
+				"startPositionX": 150,
+				"startPositionY": 200,
+				"numCells": 1
+			},
+			{
+				"colonyColor": "green",
+				"cellDurability": 3,
+				"speed": 300,
+				"damageMultiplier": 1,
+				"startPositionX": 2000,
+				"startPositionY": 200,
+				"numCells": 5
+			},
+			{
+				"colonyColor": "black",
+				"cellDurability": 5,
+				"speed": 100,
+				"damageMultiplier": 10,
+				"startPositionX": 4000,
+				"startPositionY": 200,
+				"numCells": 2
+			}
+		]
+	}
 }
