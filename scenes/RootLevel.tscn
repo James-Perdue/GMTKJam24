@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://nwy5vuwjgas0"]
+[gd_scene load_steps=5 format=3 uid="uid://nwy5vuwjgas0"]
 
 [ext_resource type="Script" path="res://scenes/root_level.gd" id="1_2vcth"]
 [ext_resource type="PackedScene" uid="uid://clhgopfoq7iyb" path="res://PlayerController.tscn" id="1_lfa0c"]
 [ext_resource type="PackedScene" uid="uid://crh0161j70xk1" path="res://levels/Lv1TileMap.tscn" id="2_7irqn"]
 [ext_resource type="PackedScene" uid="uid://b26ov37i1p072" path="res://scenes/game_over_restart.tscn" id="5_nw7ai"]
-[ext_resource type="PackedScene" uid="uid://bv8xoebp4rnm4" path="res://levels/Lv2TileMap.tscn" id="5_xbguw"]
 
 [node name="RootLevel" type="Node2D"]
 script = ExtResource("1_2vcth")
@@ -28,8 +27,5 @@ position = Vector2(246, 244)
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(1216, -11069)
-
-[node name="Lv2TileMap" parent="." instance=ExtResource("5_xbguw")]
-position = Vector2(-204, -216)
 
 [connection signal="timeout" from="FoodTimer" to="." method="_on_food_timer_timeout"]
