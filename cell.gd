@@ -4,7 +4,7 @@ var target_position = Vector2()
 var color : String
 var lifeTime : int
 var lifeRemaining : float
-
+var playAnim := true
 @onready var cellAnim = $CellAnimation;
 func initialize(newSpeed : int, newColor : String, newLifeTime : int) -> void:
 	if(newSpeed > 0):
@@ -14,7 +14,8 @@ func initialize(newSpeed : int, newColor : String, newLifeTime : int) -> void:
 	
 func _ready() -> void:
 	cellAnim.modulate = Color(color)
-	cellAnim.play("wiggle")
+	if(playAnim):
+		cellAnim.play("wiggle")
 	randomize()
 	target_position = get_parent().get_random_point_in_circle(get_parent().colonyRadius)
 	move_to_target()
