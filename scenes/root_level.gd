@@ -227,7 +227,20 @@ var enemiesLvl2Area1 = [
 		damageMultiplier = 10,
 		startPosition = Vector2(4538, -1542),
 		numCells = 250
-	}]
+	}
+]
+
+var enemiesLvl3Area1 = [
+	{
+		colonyColor = 'white',
+		cellDurability = 20,
+		speed = 200,
+		damageMultiplier = 20,
+		startPosition = Vector2(2133, 1172),
+		numCells = 400
+	}
+]
+
 var player
 var camera
 var game_over
@@ -241,7 +254,7 @@ func _ready() -> void:
 
 
 func initializeEnemies() -> void:
-	if(false):
+	if(true):
 		for enemy in enemiesLvl1Area1:
 			print('enemy', enemy)
 			var initializedEnemy = EnemyController.instantiate()
@@ -303,11 +316,17 @@ func change_level(levelNumber: int):
 	cleanUp()
 	self.get_child(0).call_deferred("replace_by", newLevel)
 	self.get_node('PlayerController').get_node('Colony').global_position = Vector2(617, 336)
-	if(newLevel.name == "Lv2TileMap"):
+	if(newLevel.name == "Lv2TileMap" and true):
 		for enemy in enemiesLvl2Area1:
 			print('enemy', enemy)
 			var initializedEnemy = EnemyController.instantiate()
 			initializedEnemy.colonySettings = enemy 
 			add_child(initializedEnemy)
 			initializedEnemy.add_to_group("enemy")
-	
+	if(newLevel.name == "Lv3TileMap" and true):
+		for enemy in enemiesLvl3Area1:
+			print('enemy', enemy)
+			var initializedEnemy = EnemyController.instantiate()
+			initializedEnemy.colonySettings = enemy 
+			add_child(initializedEnemy)
+			initializedEnemy.add_to_group("enemy")
