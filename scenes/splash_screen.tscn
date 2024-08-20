@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjn0bdn0fraf5"]
+[gd_scene load_steps=16 format=3 uid="uid://cjn0bdn0fraf5"]
 
 [ext_resource type="Texture2D" uid="uid://ddlgmthbhq10i" path="res://art/temp_bkgnd.png" id="1_mq7bt"]
 [ext_resource type="Script" path="res://scenes/splash_screen.gd" id="2_o0huj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://2tf23y4l4fjd" path="res://art/disabled_button.png" id="6_ahaeq"]
 [ext_resource type="Texture2D" uid="uid://bhdeol5mcbf01" path="res://art/exit.png" id="7_bnebb"]
 [ext_resource type="Texture2D" uid="uid://dcunn71mak0qd" path="res://art/pressed_exit.png" id="8_i6btj"]
+[ext_resource type="PackedScene" uid="uid://bk47xm18eapl3" path="res://scenes/controls_info.tscn" id="9_v0a1i"]
 
 [sub_resource type="Theme" id="Theme_h7hwf"]
 
@@ -145,6 +146,8 @@ size_flags_vertical = 3
 
 [node name="Button" type="TextureButton" parent="upgrade_grid/leaderboard"]
 layout_mode = 2
+tooltip_text = "Sorry :( We didn't get to implement this :/"
+disabled = true
 shortcut = SubResource("Shortcut_gfq7k")
 texture_normal = ExtResource("4_akfvo")
 texture_pressed = ExtResource("5_5iowj")
@@ -178,3 +181,7 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_juuud")
 texture_normal = ExtResource("7_bnebb")
 texture_pressed = ExtResource("8_i6btj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="controls" parent="CanvasLayer" instance=ExtResource("9_v0a1i")]
