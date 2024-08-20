@@ -4,7 +4,8 @@ var EnemyController = preload("res://scenes/EnemyController.tscn")
 var PlayerController = preload("res://PlayerController.tscn")
 var tileMaps = {
 	level1 = preload("res://levels/Lv1TileMap.tscn"),
-	level2 = preload("res://levels/Lv2TileMap.tscn")
+	level2 = preload("res://levels/Lv2TileMap.tscn"),
+	level3 = preload("res://levels/Lv3TileMap.tscn")
 }
 
 var enemiesLvl1Area1 = [
@@ -240,7 +241,7 @@ func _ready() -> void:
 
 
 func initializeEnemies() -> void:
-	if(true):
+	if(false):
 		for enemy in enemiesLvl1Area1:
 			print('enemy', enemy)
 			var initializedEnemy = EnemyController.instantiate()
