@@ -44,10 +44,17 @@ func _hide_controls():
 	$CanvasLayer/controls.hide()
 
 func _start_new_game():
-	print("Resetting Game")
-	get_tree().paused = false
-	self.new_game.emit()
-	return
+	if(!won):
+		print("Resetting Game")
+		get_tree().paused = false
+		self.new_game.emit()
+		return
+	var splashScreen = load("res://scenes/splash_screen.tscn")
+	if(splashScreen):
+		print("Quitting Game")
+		get_tree().paused = false
+		get_tree().change_scene_to_packed(splashScreen)
+		AudioManager.pause_music(true)
 	
 func _quit_game():
 	var splashScreen = load("res://scenes/splash_screen.tscn")
