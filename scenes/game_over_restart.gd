@@ -1,5 +1,5 @@
 extends TextureRect
-
+var won = false
 
 signal new_game()
 
@@ -21,6 +21,12 @@ func show_game_over(victory: bool):
 	#var vp_size = get_viewport().size
 	#print(vp_size)
 	#self.size = vp_size
+	if(victory):
+		won = true
+		$title_block/rich_text.text = "[center][font_size=94]Victory![/font_size][/center]"
+		$resource_display/rich_text.text = "[center][font_size=46]On to the next host... Click [New Game] to try again. [/font_size][/center]"
+	else:
+		won = false
 	self.show()
 
 func _show_leaderboard():
@@ -30,9 +36,17 @@ func _show_controls():
 	print("Go to controls screen")
 
 func _start_new_game():
-	print("Resetting Game")
-	get_tree().paused = false
-	self.new_game.emit()
+	if(!won):
+		print("Resetting Game")
+		get_tree().paused = false
+		self.new_game.emit()
+		return
+	var splashScreen = load("res://scenes/splash_screen.tscn")
+	if(splashScreen):
+		print("Quitting Game")
+		get_tree().paused = false
+		get_tree().change_scene_to_packed(splashScreen)
+		AudioManager.pause_music(true)
 	
 func _quit_game():
 	var splashScreen = load("res://scenes/splash_screen.tscn")

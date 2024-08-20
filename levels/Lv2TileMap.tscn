@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://bv8xoebp4rnm4"]
+[gd_scene load_steps=5 format=4 uid="uid://bv8xoebp4rnm4"]
 
 [ext_resource type="TileSet" uid="uid://c4yysoxdmm446" path="res://assets/StomachTileSet.tres" id="1_bv8cs"]
 [ext_resource type="Script" path="res://levels/DoorTo3.gd" id="2_ajkw7"]
+[ext_resource type="Texture2D" uid="uid://c515brgmfn2t" path="res://art/Tentacle.png" id="3_jfwo2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghhua"]
 size = Vector2(512, 256)
@@ -16,5 +17,17 @@ script = ExtResource("2_ajkw7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorTo3"]
 position = Vector2(3331, -3967)
 shape = SubResource("RectangleShape2D_ghhua")
+
+[node name="Sprite2D" type="Sprite2D" parent="DoorTo3"]
+position = Vector2(3330.36, -3956.75)
+rotation = 0.725252
+scale = Vector2(8, 3.758)
+texture = ExtResource("3_jfwo2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="DoorTo3"]
+position = Vector2(3330.36, -3956.75)
+rotation = -0.679561
+scale = Vector2(8, 3.758)
+texture = ExtResource("3_jfwo2")
 
 [connection signal="area_entered" from="DoorTo3" to="DoorTo3" method="_on_area_entered"]
