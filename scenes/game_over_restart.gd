@@ -9,7 +9,9 @@ func _ready() -> void:
 	$upgrade_grid/leaderboard/Button.pressed.connect(self._show_leaderboard)
 	$upgrade_grid/controls/Button.pressed.connect(self._show_controls)
 	$upgrade_grid/new_game/Button.pressed.connect(self._start_new_game)
+	$CanvasLayer/controls.exit_c.connect(self._hide_controls)
 	$exit_cont/exit_button.pressed.connect(self._quit_game)
+	$CanvasLayer/controls.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,6 +29,7 @@ func show_game_over(victory: bool):
 		$resource_display/rich_text.text = "[center][font_size=46]On to the next host... Click [New Game] to try again. [/font_size][/center]"
 	else:
 		won = false
+	$CanvasLayer/controls.hide()
 	self.show()
 
 func _show_leaderboard():
@@ -34,6 +37,11 @@ func _show_leaderboard():
 
 func _show_controls():
 	print("Go to controls screen")
+	$CanvasLayer/controls.show()
+
+func _hide_controls():
+	print("Hiding Controls")
+	$CanvasLayer/controls.hide()
 
 func _start_new_game():
 	if(!won):
