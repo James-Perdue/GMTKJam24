@@ -241,7 +241,7 @@ func _ready() -> void:
 
 
 func initializeEnemies() -> void:
-	if(false):
+	if(true):
 		for enemy in enemiesLvl1Area1:
 			print('enemy', enemy)
 			var initializedEnemy = EnemyController.instantiate()
